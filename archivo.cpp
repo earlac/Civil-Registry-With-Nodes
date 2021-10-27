@@ -20,27 +20,8 @@ struct Persona{
 	string hobby;
 	int tipoMusica;
 	int cedula;
-
-	/*
-	Persona(string nNombre, int nEdad, int nProvincia, string nCanton, string nDistrito, int nSexo, int nEstCivil, int nSueldo, int nAnnosTrabajando, int nCantHijos, int nTipoAlimentacion, int nTipoComida, string nHobby, int nTipoMusica, int nCedula){
-		nombre = nNombre;
-		edad = nEdad;
-		provincia = nProvincia;
-		canton = nCanton;
-		distrito = nDistrito;
-		sexo = nSexo;
-		estCivil = nEstCivil;
-		sueldo = nSueldo;
-		annosTrabajando = nAnnosTrabajando;
-		cantHijos = nCantHijos;
-		tipoAlimentacion = nTipoAlimentacion;
-		tipoComida = nTipoComida;
-		hobby = nHobby;
-		tipoMusica = nTipoMusica;
-		cedula = nCedula;
-	}
-	*/
 };
+/*
 void setNombre(Persona *p, int nNombre){p->nombre= nNombre;}
 void setEdad(Persona *p, int nEdad){p->edad= nEdad;}
 void setProvincia(Persona *p, int nProvincia){p->provincia= nProvincia;}
@@ -56,8 +37,11 @@ void setTipocomida(Persona *p, int nTipocomida){p->tipoComida= nTipocomida;}
 void setHobby(Persona *p, int nHobby){p->hobby= nHobby;}
 void setTipomusica(Persona *p, int nTipomusica){p->tipoMusica= nTipomusica;}
 void setCedula(Persona *p, int nCedula){p->cedula= nCedula;}
+*/
 
-void escribir(Persona x){
+//-------------------| Methods |---------------------
+
+void escribir(Persona p){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 
 	if(archivo.fail()){
@@ -66,27 +50,13 @@ void escribir(Persona x){
 	}
 
 	archivo.seekp(0, ios::end);
-	archivo.write(reinterpret_cast<char*>(&x), sizeof(x));
+	archivo.write(reinterpret_cast<char*>(&p), sizeof(p));
 	archivo.close();
 }
-/*
-void modificar(Persona nueva, int reg){
-	fstream archivo("archivobinario.txt", ios::in|ios::out|ios::binary);
 
-	if(archivo.fail()){
-		cout<<"\nNo se pudo abrir el archivo";
-		exit(1);
-	}
-
-	archivo.seekp(reg*sizeof(nueva), ios::beg);
-	archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
-
-	archivo.close();
-}
-*/
 void leer(){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
-	Persona p;
+	struct Persona p;
 
 	if(archivo.fail()){
 		cout<<"\nNo se pudo abrir el archivo";
@@ -95,13 +65,52 @@ void leer(){
 	archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
 
 	while(!archivo.eof()){
-		cout<<"\nNombre: "<<p.nombre<<" Edad: "<<p.edad<<endl;
-		archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+        cout<<"\nNombre: "<<p.nombre<<" Cedula: "<<p.cedula<<" Edad: "<<p.edad<<" annos "<<"\nProvincia: "<<p.provincia<<" Canton: "<<p.canton<<" Distrito: "
+        <<p.distrito<<" Sexo: "<<p.sexo<<" Estado Civil: "<<p.estCivil<<"\nSueldo: "<<p.sueldo<<" Annos Trabajando: "
+        <<p.annosTrabajando<<" Cantidad de Hijos: "<<p.cantHijos<<"\nTipo de Alimentacion: "<<p.tipoAlimentacion<<" Tipo de Comida: "
+        <<p.tipoComida<<" Hobby: "<<p.hobby<<" Tipo de Musica: "<<p.tipoMusica<<endl;
 	}
 	archivo.close();
 }
 
-//-------------------| Methods |---------------------
+//-------|Pedir|--------
+
+int pedirInt(string peticion){
+/*
+Inputs: 
+        string that prints the request to the user for which the number is for 
+Process:
+        asks user for a number, the reason depends on the string entered
+Outputs:
+        User input
+*/
+    int num;
+    cout<<peticion;
+    while(!(cin>>num)){
+        cin.clear();
+        while(cin.get() != '\n')
+            continue;   
+        cout<<"Favor digitar solo numeros"<<endl;
+        return pedirInt(peticion); 
+    }
+    return num;   
+}
+
+string pedirString(string peticion){
+/*
+Inputs: 
+        peticion: personalizes the request of the string to the user
+Process:
+        Asks user for a string regarding peticion
+Outputs:
+        string written by the user
+*/
+    string nString;
+    cout<<peticion;
+    cin.sync();
+    getline(cin, nString);
+    return nString;
+}
 
 //-------|Find person using ID or name |---------
 
@@ -109,6 +118,7 @@ void buscarId(int id){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
     int contador = 0;
+    bool encontrado = false;
 
 	if(archivo.fail()){
 		cout<<"\nNo se pudo abrir el archivo";
@@ -123,11 +133,41 @@ void buscarId(int id){
             <<p.annosTrabajando<<" Cantidad de Hijos: "<<p.cantHijos<<"\nTipo de Alimentacion: "<<p.tipoAlimentacion<<" Tipo de Comida: "
             <<p.tipoComida<<" Hobby: "<<p.hobby<<" Tipo de Musica: "<<p.tipoMusica<<endl;
             cout<<"Posicion: "<<contador<<endl;
+            encontrado = true;
         }
         contador = contador + 1;
 		archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
 	}
 	archivo.close();
+    if(encontrado==true)return;
+}
+
+void buscarNombre(string pNombre){
+	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+	Persona p;
+    int contador = 0;
+    bool encontrado = false;
+
+	if(archivo.fail()){
+		cout<<"\nNo se pudo abrir el archivo";
+		exit(1);
+	}
+	archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+
+	while(!archivo.eof()){
+		if(p.nombre == pNombre){
+            cout<<"\nNombre: "<<p.nombre<<" Cedula: "<<p.cedula<<" Edad: "<<p.edad<<" annos "<<"\nProvincia: "<<p.provincia<<" Canton: "<<p.canton<<" Distrito: "
+            <<p.distrito<<" Sexo: "<<p.sexo<<" Estado Civil: "<<p.estCivil<<"\nSueldo: "<<p.sueldo<<" Annos Trabajando: "
+            <<p.annosTrabajando<<" Cantidad de Hijos: "<<p.cantHijos<<"\nTipo de Alimentacion: "<<p.tipoAlimentacion<<" Tipo de Comida: "
+            <<p.tipoComida<<" Hobby: "<<p.hobby<<" Tipo de Musica: "<<p.tipoMusica<<endl;
+            cout<<"Posicion: "<<contador<<endl;
+            encontrado = true;
+        }
+        contador = contador + 1;
+		archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+	}
+	archivo.close();
+    if(encontrado==true)return;
 }
 
 int buscarPos(int id){
@@ -143,7 +183,6 @@ int buscarPos(int id){
 
 	while(!archivo.eof()){
 		if(p.cedula == id){
-            cout<<contador<<endl;
             return contador;
         }
         contador = contador + 1;
@@ -153,44 +192,312 @@ int buscarPos(int id){
     return contador;
 }
 
-void modificar(Persona nueva, int reg){
-	fstream archivo("archivobinario.txt", ios::in|ios::out|ios::binary);
-
-	if(archivo.fail()){
-		cout<<"\nNo se pudo abrir el archivo";
-		exit(1);
-	}
-
-	archivo.seekp(reg*sizeof(nueva), ios::beg);
-	archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
-
-	archivo.close();
-}
-
-void modificarNombre(int reg, string nNombre){
-	cout<<"Modificar nombre";
+void buscarPorPos(int reg){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
-	Persona p;
-	if(archivo.fail()){
-		cout<<"\nNo se pudo abrir el archivo";
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
 		exit(1);
 	}
-    Persona nueva = {nNombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
-    cout<<"Persona nueva";
-    archivo.seekp(reg*sizeof(nueva), ios::beg);
-	archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
-	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    cout<<"\nNombre: "<<p.nombre<<" Cedula: "<<p.cedula<<" Edad: "<<p.edad<<" annos "<<"\nProvincia: "<<p.provincia<<" Canton: "<<p.canton<<" Distrito: "
+    <<p.distrito<<" Sexo: "<<p.sexo<<" Estado Civil: "<<p.estCivil<<"\nSueldo: "<<p.sueldo<<" Annos Trabajando: "
+    <<p.annosTrabajando<<" Cantidad de Hijos: "<<p.cantHijos<<"\nTipo de Alimentacion: "<<p.tipoAlimentacion<<" Tipo de Comida: "
+    <<p.tipoComida<<" Hobby: "<<p.hobby<<" Tipo de Musica: "<<p.tipoMusica<<endl;
 	archivo.close();
 }
 
-void modificarPersona(int cedula, string nombre){
-    cout<<"Modificar"<<endl;
-    int pos = buscarPos(cedula);
-    cout<<"Posicion: "<<pos<<" Cedula: "<<cedula<<" Nombre: "<<nombre<<endl;
-    modificarNombre(pos, nombre);
-}
+void modificarNombre(int cedula, string nNombre){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {nNombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
-//archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarEdad(int cedula, int nEdad){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, nEdad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarProvincia(int cedula, int nProvincia){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, nProvincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarCanton(int cedula, string nCanton){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, nCanton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarDistrito(int cedula, string nDistrito){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, nDistrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarSexo(int cedula, int nSexo){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, nSexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarEstcivil(int cedula, int nEstcivil){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, nEstcivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarSueldo(int cedula, int nSueldo){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, nSueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarAnnostrabajando(int cedula, int nAnnostrabajando){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, nAnnostrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarCanthijos(int cedula, int nCanthijos){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, nCanthijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarTipoalimentacion(int cedula, int nTipoalimentacion){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, nTipoalimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarTipocomida(int cedula, int nTipocomida){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, nTipocomida, p.hobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarHobby(int cedula, string nHobby){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, nHobby, p.tipoMusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarTipomusica(int cedula, int nTipomusica){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, nTipomusica, p.cedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+void modificarCedula(int cedula, int nCedula){
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    int reg = buscarPos(cedula);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+	
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    
+    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, nCedula};
+
+    archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	archivo.close();
+}
+        
+
+//void modificarPersona(int cedula, string nombre){
+//    int pos = buscarPos(cedula);
+//    modificarNombre(pos);
+//}
+
 void imprimirPersona(int reg){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
@@ -201,7 +508,6 @@ void imprimirPersona(int reg){
 	}
 	archivo.seekp(reg*sizeof(p), ios::beg);
 	archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
-	cout<<"\nNombre: "<<p.nombre<<" Edad: "<<p.edad<<endl;
 	archivo.close();
 }
 
@@ -359,27 +665,149 @@ void cargarDatos(){
 
     Persona p50 = {"Zul", 31, 1, "ESPARZA", "San Juan Grande", 1, 3, 282601, 2, 2, 2, 3, "Guitarra", 2, 521424187};
     escribir(p50);
-	
-	//leer();
 
-	//Persona nueva = {"Mauricio", 20, 3, "El  Guarco", "Tejar", 1, 2, 300000, 5, 0, 1, 2, "Guitarra", 8, 119540199};
-	//modificar(nueva,1);
-
-	//leer();
-
+    cout<<"Las personas han sido ingresadas en el archivo satisfactoriamente."<<endl;
 }
 
+void menuPrincipal();
+
+void menuModificar(){
+/*
+Inputs: 
+        string opcionMenuAdmin.
+Process:
+        Displays a menu, asks for input, leads user to option chosen.
+Outputs:
+        Menu chosen by the user.
+*/
+    cout<<"\n-------------------------"<<endl;
+    cout<<"--Menu de Modificaciones--"<<endl;
+    cout<<"\nEscoja e ingrese el numero de la opcion seleccionada:"<<endl;
+    cout<<"1- Nombre\n2- Cedula\n3- Edad\n4- Provincia\n5- Canton\n6- Distrito\n7- Sexo\n8- Estado Civil\n9- Sueldo\n10- Annos Trabajando\n11- Cantidad Hijos\n12- Tipo Alimentacion\n13- Tipo de Comida\n14- Hobby\n15- Tipo de Musica\n\n16- Volver al menu principal\nOpcion: ";
+    
+    string opcion;
+    
+    cin>>opcion;
+    string pedir = "Ingrese la cedula de la persona: ";
+    
+    if(opcion =="1"){
+        modificarNombre(pedirInt(pedir), pedirString("Ingrese el nuevo nombre: "));
+        menuModificar();
+    }
+    else if(opcion == "2"){
+        modificarCedula(pedirInt(pedir), pedirInt("Ingrese la nueva cedula: "));
+        menuModificar();
+    }
+    else if(opcion == "3"){
+        modificarEdad(pedirInt(pedir), pedirInt("Ingrese la nueva edad de la persona: "));
+        menuModificar();
+    }
+    else if(opcion == "4"){
+        modificarProvincia(pedirInt(pedir), pedirInt("Ingrese el numero de la nueva provincia: "));
+        menuModificar();
+    }
+    else if(opcion == "5"){
+        modificarCanton(pedirInt(pedir), pedirString("Ingrese el nuevo nombre del canton: "));
+        menuModificar();
+    }
+    else if(opcion == "6"){
+        modificarDistrito(pedirInt(pedir), pedirString("Ingrese el nuevo distrito: "));
+        menuModificar();
+    }
+    else if(opcion == "7"){
+        modificarSexo(pedirInt(pedir), pedirInt("Ingrese el nuevo sexo: "));
+        menuModificar();
+    }
+    else if(opcion == "8"){
+        modificarEstcivil(pedirInt(pedir), pedirInt("Ingrese el nuevo estado civil: "));
+        menuModificar();
+
+    }
+    else if(opcion == "9"){
+        modificarSueldo(pedirInt(pedir), pedirInt("Ingrese el nuevo sueldo: "));
+        menuModificar();
+
+    }
+    else if(opcion == "10"){
+        modificarAnnostrabajando(pedirInt(pedir), pedirInt("Ingrese la nueva cantidad de annos trabajando: "));
+        menuModificar();
+
+    }
+    else if(opcion == "11"){
+        modificarCanthijos(pedirInt(pedir), pedirInt("Ingrese la nueva cantidad de hijos: "));
+        menuModificar();
+
+    }
+    else if(opcion == "12"){
+        modificarTipoalimentacion(pedirInt(pedir), pedirInt("Ingrese el nuevo tipo de alimentacion: "));
+        menuModificar();
+
+    }
+    else if(opcion == "13"){
+        modificarTipocomida(pedirInt(pedir), pedirInt("Ingrese el nuevo tipo de Comida: "));
+        menuModificar();
+
+    }
+    else if(opcion == "14"){
+        modificarHobby(pedirInt(pedir), pedirString("Ingrese el nuevo hobby: "));
+        menuModificar();
+
+    }else if(opcion == "15"){
+        modificarTipomusica(pedirInt(pedir), pedirInt("Ingrese el nuevo tipo de musica: "));
+        menuModificar();
+    }else if(opcion == "16"){
+        menuPrincipal();
+    }else{
+        cout<<"Ingrese una opcion valida."<<endl;
+        menuModificar();
+    }
+}
+
+void menuPrincipal(){
+/*
+Inputs: 
+        Number of choice.
+Process:
+        Displays the main menu for user to choose between the opcions.
+Outputs:
+        Respective function in the system.
+*/
+    cout<<"\n\n"<<endl;
+    cout<<"----------------------------------------------------------------"<<endl;
+    cout<<"--------------Avance del segundo proyecto: Archivos-------------"<<endl;
+    cout<<"----------------------------------------------------------------\n"<<endl;
+    cout<<"Ingrese el numero de la opcion deseada: \n 1- Buscar persona por ID\n 2- Buscar persona por nombre\n 3- Buscar persona por posicion \n 4- Modificar persona \n 5- Salir\n\nNumero: ";
+    string opcion;
+    cin>>opcion;
+    if(opcion=="1"){
+        buscarId(pedirInt("Ingrese la cedula de la persona a buscar: "));
+        menuPrincipal();
+    }else if(opcion=="2"){
+        buscarNombre(pedirString("Ingrese el nombre la persona a buscar: "));
+        menuPrincipal();
+    }else if(opcion=="3"){
+        buscarPorPos(pedirInt("Ingrese la posicion en el archivo de la persona a buscar: "));
+        menuPrincipal();
+    }else if(opcion=="4"){
+        menuModificar();
+    }else if(opcion=="5"){
+        cout<<"\n\nSaliendo...\n\n";
+        cout<<"Gracias por usar nuestro sistema! (Profe porfa ponganos 100)"<<endl;
+        system("pause");
+        return;
+    }else{
+        cout<<"Ingrese una opcion valida.";
+        menuPrincipal();
+    }
+}
 int main(){
     ofstream archivo("archivobinario.txt");
+    cout<<"\n\n\t\tCargando Datos...\n\n";
 	cargarDatos();
-	//cout<<"\nImprimir"<<endl;
-	//imprimirPersona(0);
-    
-    //buscarId(615094092);
-    modificarPersona(521424187, "Juana");
-    buscarId(521424187);
     //buscarId(521424187);
-	int status = remove("archivobinario.txt");
-
+    //modificarPersona(521424187, "Juana");
+    //cout<<"Se termino de modificar"<<endl;
+    //buscarId(521424187);
+	menuPrincipal();
 	return 0;
 }
