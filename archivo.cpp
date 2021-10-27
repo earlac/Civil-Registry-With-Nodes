@@ -107,8 +107,7 @@ Outputs:
 */
     string nString;
     cout<<peticion;
-    cin.sync();
-    getline(cin, nString);
+    cin>>nString;
     return nString;
 }
 
