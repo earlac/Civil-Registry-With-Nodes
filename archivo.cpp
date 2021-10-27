@@ -69,7 +69,7 @@ void escribir(Persona x){
 	archivo.write(reinterpret_cast<char*>(&x), sizeof(x));
 	archivo.close();
 }
-
+/*
 void modificar(Persona nueva, int reg){
 	fstream archivo("archivobinario.txt", ios::in|ios::out|ios::binary);
 
@@ -83,7 +83,7 @@ void modificar(Persona nueva, int reg){
 
 	archivo.close();
 }
-
+*/
 void leer(){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
@@ -105,9 +105,10 @@ void leer(){
 
 //-------|Find person using ID or name |---------
 
-void buscarId(){
+void buscarId(int id){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
+    int contador = 0;
 
 	if(archivo.fail()){
 		cout<<"\nNo se pudo abrir el archivo";
@@ -116,16 +117,83 @@ void buscarId(){
 	archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
 
 	while(!archivo.eof()){
-		cout<<"\nNombre: "<<p.nombre<<" Edad: "<<p.edad<<endl;
+		if(p.cedula == id){
+            cout<<"\nNombre: "<<p.nombre<<" Cedula: "<<p.cedula<<" Edad: "<<p.edad<<" annos "<<"\nProvincia: "<<p.provincia<<" Canton: "<<p.canton<<" Distrito: "
+            <<p.distrito<<" Sexo: "<<p.sexo<<" Estado Civil: "<<p.estCivil<<"\nSueldo: "<<p.sueldo<<" Annos Trabajando: "
+            <<p.annosTrabajando<<" Cantidad de Hijos: "<<p.cantHijos<<"\nTipo de Alimentacion: "<<p.tipoAlimentacion<<" Tipo de Comida: "
+            <<p.tipoComida<<" Hobby: "<<p.hobby<<" Tipo de Musica: "<<p.tipoMusica<<endl;
+            cout<<"Posicion: "<<contador<<endl;
+        }
+        contador = contador + 1;
 		archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
 	}
 	archivo.close();
 }
 
+int buscarPos(int id){
+	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+	Persona p;
+    int contador = 0;
+
+	if(archivo.fail()){
+		cout<<"\nNo se pudo abrir el archivo";
+		exit(1);
+	}
+	archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+
+	while(!archivo.eof()){
+		if(p.cedula == id){
+            cout<<contador<<endl;
+            return contador;
+        }
+        contador = contador + 1;
+		archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+	}
+    archivo.close();
+    return contador;
+}
+
+void modificar(Persona nueva, int reg){
+	fstream archivo("archivobinario.txt", ios::in|ios::out|ios::binary);
+
+	if(archivo.fail()){
+		cout<<"\nNo se pudo abrir el archivo";
+		exit(1);
+	}
+
+	archivo.seekp(reg*sizeof(nueva), ios::beg);
+	archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+
+	archivo.close();
+}
+
+void modificarNombre(int reg, string nNombre){
+	cout<<"Modificar nombre";
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+	Persona p;
+	if(archivo.fail()){
+		cout<<"\nNo se pudo abrir el archivo";
+		exit(1);
+	}
+    Persona nueva = {nNombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    cout<<"Persona nueva";
+    archivo.seekp(reg*sizeof(nueva), ios::beg);
+	archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
+	
+	archivo.close();
+}
+
+void modificarPersona(int cedula, string nombre){
+    cout<<"Modificar"<<endl;
+    int pos = buscarPos(cedula);
+    cout<<"Posicion: "<<pos<<" Cedula: "<<cedula<<" Nombre: "<<nombre<<endl;
+    modificarNombre(pos, nombre);
+}
+
+//archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 void imprimirPersona(int reg){
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
-	int contador = 0;
 
 	if(archivo.fail()){
 		cout<<"\nNo se pudo abrir el archivo";
@@ -292,7 +360,7 @@ void cargarDatos(){
     Persona p50 = {"Zul", 31, 1, "ESPARZA", "San Juan Grande", 1, 3, 282601, 2, 2, 2, 3, "Guitarra", 2, 521424187};
     escribir(p50);
 	
-	leer();
+	//leer();
 
 	//Persona nueva = {"Mauricio", 20, 3, "El  Guarco", "Tejar", 1, 2, 300000, 5, 0, 1, 2, "Guitarra", 8, 119540199};
 	//modificar(nueva,1);
@@ -302,13 +370,16 @@ void cargarDatos(){
 }
 
 int main(){
+    ofstream archivo("archivobinario.txt");
 	cargarDatos();
-	cout<<"\nImprimir"<<endl;
-	imprimirPersona(0);
-
-	std::ofstream ofs;
-	ofs.open("archivobinario.txt", std::ofstream::out | std::ofstream::trunc);
-	ofs.close();
+	//cout<<"\nImprimir"<<endl;
+	//imprimirPersona(0);
+    
+    //buscarId(615094092);
+    modificarPersona(521424187, "Juana");
+    buscarId(521424187);
+    //buscarId(521424187);
+	int status = remove("archivobinario.txt");
 
 	return 0;
 }

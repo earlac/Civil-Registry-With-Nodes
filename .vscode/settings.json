@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "iosfwd": "cpp"
+        "*.asm": "asm-collection",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
     }
 }
