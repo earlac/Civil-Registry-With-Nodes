@@ -5,21 +5,23 @@
 using namespace std;
 
 struct Persona{
+    int id;
 	string nombre;
 	int edad;
-	int provincia;
+	string provincia;
 	string canton;
 	string distrito;
-	int sexo;
-	int estCivil;
+	string sexo;
+	string estCivil;
 	int sueldo;
 	int annosTrabajando;
 	int cantHijos;
-	int tipoAlimentacion;
-	int tipoComida;
+	string tipoAlimentacion;
+	string tipoComida;
 	string hobby;
-	int tipoMusica;
-	int cedula;
+	string tipoMusica;
+    int cedula;
+	
 };
 /*
 void setNombre(Persona *p, int nNombre){p->nombre= nNombre;}
@@ -219,7 +221,7 @@ void modificarNombre(int cedula, string nNombre){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {nNombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, nNombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -238,14 +240,14 @@ void modificarEdad(int cedula, int nEdad){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, nEdad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, nEdad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
 }
         
 
-void modificarProvincia(int cedula, int nProvincia){
+void modificarProvincia(int cedula, string nProvincia){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -257,7 +259,7 @@ void modificarProvincia(int cedula, int nProvincia){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, nProvincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, nProvincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -276,7 +278,7 @@ void modificarCanton(int cedula, string nCanton){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, nCanton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, nCanton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -295,14 +297,14 @@ void modificarDistrito(int cedula, string nDistrito){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, nDistrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, nDistrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
 }
         
 
-void modificarSexo(int cedula, int nSexo){
+void modificarSexo(int cedula, string nSexo){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -314,14 +316,14 @@ void modificarSexo(int cedula, int nSexo){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, nSexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, nSexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
 }
         
 
-void modificarEstcivil(int cedula, int nEstcivil){
+void modificarEstcivil(int cedula, string nEstcivil){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -333,7 +335,7 @@ void modificarEstcivil(int cedula, int nEstcivil){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, nEstcivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, nEstcivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -352,7 +354,7 @@ void modificarSueldo(int cedula, int nSueldo){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, nSueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, nSueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -371,7 +373,7 @@ void modificarAnnostrabajando(int cedula, int nAnnostrabajando){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, nAnnostrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, nAnnostrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -390,14 +392,14 @@ void modificarCanthijos(int cedula, int nCanthijos){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, nCanthijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, nCanthijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
 }
         
 
-void modificarTipoalimentacion(int cedula, int nTipoalimentacion){
+void modificarTipoalimentacion(int cedula, string nTipoalimentacion){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -409,14 +411,14 @@ void modificarTipoalimentacion(int cedula, int nTipoalimentacion){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, nTipoalimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, nTipoalimentacion, p.tipoComida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
 }
         
 
-void modificarTipocomida(int cedula, int nTipocomida){
+void modificarTipocomida(int cedula, string nTipocomida){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -428,7 +430,7 @@ void modificarTipocomida(int cedula, int nTipocomida){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, nTipocomida, p.hobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, nTipocomida, p.hobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -447,14 +449,14 @@ void modificarHobby(int cedula, string nHobby){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, nHobby, p.tipoMusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, nHobby, p.tipoMusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
 }
         
 
-void modificarTipomusica(int cedula, int nTipomusica){
+void modificarTipomusica(int cedula, string nTipomusica){
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -466,7 +468,7 @@ void modificarTipomusica(int cedula, int nTipomusica){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, nTipomusica, p.cedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, nTipomusica, p.cedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -485,7 +487,7 @@ void modificarCedula(int cedula, int nCedula){
     archivo.seekp(reg*sizeof(p), ios::beg);
     archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
     
-    Persona nueva = {p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, nCedula};
+    Persona nueva = {p.id, p.nombre, p.edad, p.provincia, p.canton, p.distrito, p.sexo, p.estCivil, p.sueldo, p.annosTrabajando, p.cantHijos, p.tipoAlimentacion, p.tipoComida, p.hobby, p.tipoMusica, nCedula};
 
     archivo.write(reinterpret_cast<char*>(&nueva), sizeof(nueva));
 	archivo.close();
@@ -515,155 +517,256 @@ void cargarDatos(){
 	cout<<"El tamano en bits de la estructura persona: "<<sizeof(Persona);
 //string nNombre, int nEdad, int nProvincia, string nCanton, string nDistrito, int nSexo, int nEstCivil, int nSueldo, 
 //int nAnnosTrabajando, int nCantHijos, int nTipoAlimentacion, int nTipoComida, string nHobby, int nTipoMusica, int nCedula
-	Persona p1 = {"Earl", 52, 5, "LA UNION", "Juan Viñas", 1, 1, 104359, 2, 0, 1, 4, "Cantar", 4, 165195055};
-    escribir(p1);
 
-    Persona p2 = {"Brenda", 29, 7, "TURRIALBA", "Pavones", 2, 2, 722324, 8, 4, 4, 1, "Guitarra", 2, 274023277};
-    escribir(p2);
+Persona p0 = {0, "name",   50, " Alajuela", "canton", "distrito", " Hombre", " Divorciado", 235818, 0, 3, " Vegetariano", " Ninguno", " DibujarBailar", " Merengue", 545012188};
+escribir(p0);
 
-    Persona p3 = {"Vianna", 32, 3, "ALVARADO", "Cervantes", 2, 2, 107361, 7, 3, 4, 1, "Programar", 7, 450564599};
-    escribir(p3);
+        
 
-    Persona p4 = {"Heimy", 40, 4, "OREAMUNO", "San Rafael", 2, 1, 429157, 2, 2, 1, 3, "Correr", 2, 520496956};
-    escribir(p4);
+Persona p1 = {1, "name",   22, " Heredia", "canton", "distrito", " Prefiero no decirlo", " Juntado", 675292, 7, 2, " Vegetariano", " Mediterraneo", " Leer", " Rancheras", 219306035};
+escribir(p1);
 
-    Persona p5 = {"Alia", 42, 7, "EL GUARCO", "Patio de Agua", 2, 3, 416446, 0, 3, 1, 1, "Ajedrez", 5, 269060435};
-    escribir(p5);
+        
 
-    Persona p6 = {"Jackeline", 41, 6, "HEREDIA", "Mercedes", 2, 1, 333500, 4, 3, 3, 1, "Ajedrez", 3, 610700085};
-    escribir(p6);
+Persona p2 = {2, "name",   22, " Alajuela", "canton", "distrito", " Prefiero no decirlo", " Casado", 579926, 1, 1, " Omnivoro", " Ninguno", " DibujarBailar", " Rap", 618116829};
+escribir(p2);
 
-    Persona p7 = {"Adrian", 37, 6, "OREAMUNO", "Santa Rosa", 1, 2, 521349, 2, 2, 1, 4, "Musica", 6, 144106118};
-    escribir(p7);
+        
 
-    Persona p8 = {"Amanda", 31, 5, "BARVA", "San Roque", 2, 2, 185996, 7, 3, 1, 2, "Gimnasio", 2, 411779978};
-    escribir(p8);
+Persona p3 = {3, "name",   49, " Alajuela", "canton", "distrito", " Hombre", " Juntado", 617355, 2, 3, " Vegetariano", " Criollo", " Ejercicio", " Plancha", 228110672};
+escribir(p3);
 
-    Persona p9 = {"Victoria", 40, 5, "OREAMUNO", "San Rafael", 2, 3, 459711, 6, 0, 1, 1, "Gimnasio", 3, 348124677};
-    escribir(p9);
+        
 
-    Persona p10 = {"Alysa", 41, 4, "HEREDIA", "Ulloa", 2, 1, 97609, 2, 4, 1, 3, "Dibujar", 6, 565280258};
-    escribir(p10);
+Persona p4 = {4, "name",   24, " Alajuela", "canton", "distrito", " Prefiero no decirlo", " Soltero", 288376, 5, 2, " Vegetariano", " Coreano", " Correr", " Metal", 483620093};
+escribir(p4);
 
-    Persona p11 = {"Enrique", 18, 5, "ALVARADO", "Capellades", 1, 2, 128210, 3, 2, 3, 2, "Musica", 1, 726697183};
-    escribir(p11);
+        
 
-    Persona p12 = {"Frida", 51, 3, "SANTO DOMINGO", "Santa Rosa", 2, 1, 86681, 6, 4, 4, 2, "Musica", 2, 671736524};
-    escribir(p12);
+Persona p5 = {5, "name",   43, " Guanacaste", "canton", "distrito", " Mujer", " Soltero", 648240, 8, 0, " Carnivoro", " Mexicano", " Cantar", " Indie", 423575889};
+escribir(p5);
 
-    Persona p13 = {"Rossana", 43, 2, "SANTA BARBARA", "Purabá", 2, 3, 142461, 8, 0, 1, 1, "Dibujar", 4, 135075072};
-    escribir(p13);
+        
 
-    Persona p14 = {"Antonia", 42, 7, "SANTA BARBARA", "Jesús", 2, 3, 571058, 7, 4, 4, 3, "Dibujar", 1, 615094092};
-    escribir(p14);
+Persona p6 = {6, "name",   34, " Limon", "canton", "distrito", " No binario", " Juntado", 272338, 8, 3, " Vegano", " Ninguno", " Cantar", " Electronica", 341595615};
+escribir(p6);
 
-    Persona p15 = {"Tania", 44, 6, "SAN RAFAEL", "San Josecito", 2, 4, 86699, 6, 3, 3, 1, "Cocinar", 7, 618645381};
-    escribir(p15);
+        
 
-    Persona p16 = {"William", 46, 6, "BELEN", "San Antonio", 1, 1, 348825, 5, 3, 4, 3, "Guitarra", 5, 514526027};
-    escribir(p16);
+Persona p7 = {7, "name",   26, " San Jose", "canton", "distrito", " Mujer", " Soltero", 104893, 7, 0, " Omnivoro", " Salado", " Leer", " Reggaeton", 741722988};
+escribir(p7);
 
-    Persona p17 = {"Jesus", 25, 5, "FLORES", "Barrantes", 1, 3, 310118, 8, 2, 2, 1, "Guitarra", 7, 678143097};
-    escribir(p17);
+        
 
-    Persona p18 = {"Jazmin", 38, 1, "SARAPIQUI", "Puerto Viejo", 2, 2, 429470, 1, 3, 1, 1, "Programar", 5, 378694828};
-    escribir(p18);
+Persona p8 = {8, "name",   50, " Cartago", "canton", "distrito", " Hombre", " Soltero", 451472, 4, 0, " Vegetariano", " Criollo", " Idiomas", " Reggaeton", 581902812};
+escribir(p8);
 
-    Persona p19 = {"Carmen", 31, 2, "LIBERIA", "Liberia", 2, 4, 621668, 1, 3, 3, 3, "Cantar", 8, 171087147};
-    escribir(p19);
+        
 
-    Persona p20 = {"Alejandro", 28, 2, "FLORES", "Llorente", 1, 3, 549532, 2, 1, 4, 4, "Ajedrez", 1, 220369512};
-    escribir(p20);
+Persona p9 = {9, "name",   37, " Heredia", "canton", "distrito", " Hombre", " Casado", 318752, 6, 3, " Vegano", " Ninguno", " Ejercicio", " Pop", 231584042};
+escribir(p9);
 
-    Persona p21 = {"Carlos", 20, 5, "NICOYA", "Nicoya", 1, 4, 576816, 5, 1, 2, 4, "Gimnasio", 4, 253560202};
-    escribir(p21);
+        
 
-    Persona p22 = {"David", 26, 3, "NICOYA", "Nicoya", 1, 1, 735170, 5, 2, 1, 2, "Correr", 7, 124851917};
-    escribir(p22);
+Persona p10 = {10, "name",   29, " Heredia", "canton", "distrito", " Hombre", " Casado", 314253, 2, 4, " Herbivoro", " Dulce", " Idiomas", " Bachata", 448297849};
+escribir(p10);
 
-    Persona p23 = {"Max", 23, 2, "SAN RAFAEL", "San Josecito", 1, 1, 660443, 8, 1, 2, 1, "Cocinar", 4, 331075702};
-    escribir(p23);
+        
 
-    Persona p24 = {"Ingrid", 45, 6, "FLORES", "Barrantes", 2, 3, 736953, 3, 4, 3, 1, "Gimnasio", 2, 499164993};
-    escribir(p24);
+Persona p11 = {11, "name",   38, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Juntado", 130989, 0, 2, " Carnivoro", " Mexicano", " Ejercicio", " Balada", 402095587};
+escribir(p11);
 
-    Persona p25 = {"Alberto", 23, 7, "NICOYA", "Nicoya", 1, 3, 671779, 5, 4, 1, 4, "Ajedrez", 8, 509337935};
-    escribir(p25);
+        
 
-    Persona p26 = {"Rachell", 51, 1, "SANTA CRUZ", "27 de Abril", 2, 4, 410822, 1, 4, 3, 4, "Guitarra", 6, 565815663};
-    escribir(p26);
+Persona p12 = {12, "name",   33, " Guanacaste", "canton", "distrito", " Prefiero no decirlo", " Divorciado", 448634, 7, 3, " Vegetariano", " Criollo", " Cantar", " Reggaeton", 539990874};
+escribir(p12);
 
-    Persona p27 = {"Ashley", 42, 3, "BAGACES", "Río Naranjo", 2, 4, 682545, 6, 0, 1, 3, "Correr", 7, 562244536};
-    escribir(p27);
+        
 
-    Persona p28 = {"Joan", 37, 3, "CARRILLO", "Belén", 1, 2, 211349, 3, 0, 3, 2, "Programar", 5, 653911929};
-    escribir(p28);
+Persona p13 = {13, "name",   19, " Limon", "canton", "distrito", " Prefiero no decirlo", " Soltero", 123116, 7, 3, " Omnivoro", " Mediterraneo", " Correr", " Balada", 601478504};
+escribir(p13);
 
-    Persona p29 = {"Walter", 31, 4, "TILARAN", "Tilarán", 1, 4, 339760, 4, 4, 2, 2, "Musica", 1, 426107980};
-    escribir(p29);
+        
 
-    Persona p30 = {"Maria", 30, 5, "CARRILLO", "Belén", 2, 4, 342056, 8, 4, 2, 4, "Dibujar", 6, 386140477};
-    escribir(p30);
+Persona p14 = {14, "name",   46, " Limon", "canton", "distrito", " Mujer", " Soltero", 221785, 1, 2, " Herbivoro", " Salado", " Cantar", " Rancheras", 299947816};
+escribir(p14);
 
-    Persona p31 = {"Albert", 40, 4, "ABANGARES", "Juntas", 1, 3, 136473, 5, 3, 3, 1, "Cantar", 8, 399727089};
-    escribir(p31);
+        
 
-    Persona p32 = {"Luis", 30, 7, "LA CRUZ", "La Cruz", 1, 4, 398808, 7, 2, 2, 2, "Dibujar", 8, 306132513};
-    escribir(p32);
+Persona p15 = {15, "name",   19, " Cartago", "canton", "distrito", " Hombre", " Juntado", 73888, 6, 3, " Carnivoro", " Ninguno", " Guitarra", " Electronica", 635722895};
+escribir(p15);
 
-    Persona p33 = {"Daniel", 52, 5, "NANDAYURE", "Santa Rita", 1, 4, 209406, 1, 2, 3, 1, "Cantar", 2, 346825927};
-    escribir(p33);
+        
 
-    Persona p34 = {"Steven", 19, 6, "NANDAYURE", "Bejuco", 1, 1, 312324, 6, 2, 1, 2, "Cocinar", 7, 664105033};
-    escribir(p34);
+Persona p16 = {16, "name",   42, " Limon", "canton", "distrito", " No binario", " Divorciado", 630144, 0, 0, " Vegano", " Salado", " Ejercicio", " Bachata", 385522440};
+escribir(p16);
 
-    Persona p35 = {"Sofia", 22, 7, "TILARAN", "Tilarán", 2, 2, 334979, 3, 4, 4, 1, "Gimnasio", 3, 330400118};
-    escribir(p35);
+        
 
-    Persona p36 = {"Erick", 52, 6, "BAGACES", "Río Naranjo", 1, 4, 130416, 7, 2, 4, 2, "Cocinar", 4, 403171121};
-    escribir(p36);
+Persona p17 = {17, "name",   30, " Limon", "canton", "distrito", " Mujer", " Divorciado", 362763, 5, 1, " Herbivoro", " Mexicano", " Cantar", " Electronica", 354175593};
+escribir(p17);
 
-    Persona p37 = {"Melina", 20, 5, "BAGACES", "Fortuna", 2, 4, 595679, 1, 0, 1, 1, "Gimnasio", 8, 160345539};
-    escribir(p37);
+        
 
-    Persona p38 = {"Ismael", 20, 4, "HOJANCHA", "Monte Romo", 1, 2, 318160, 5, 4, 2, 2, "Musica", 3, 591878812};
-    escribir(p38);
+Persona p18 = {18, "name",   51, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Soltero", 466411, 6, 0, " Vegano", " Criollo", " Idiomas", " Reggaeton", 764538659};
+escribir(p18);
 
-    Persona p39 = {"Ignacio", 44, 1, "PUNTARENAS", "Chomes", 1, 4, 563482, 7, 1, 2, 4, "Gimnasio", 2, 433918107};
-    escribir(p39);
+        
 
-    Persona p40 = {"Ashanti", 49, 3, "PUNTARENAS", "Cóbano", 2, 3, 155325, 4, 4, 2, 2, "Musica", 4, 416190133};
-    escribir(p40);
+Persona p19 = {19, "name",   31, " Limon", "canton", "distrito", " Prefiero no decirlo", " Juntado", 431982, 7, 2, " Vegetariano", " Mexicano", " Guitarra", " Merengue", 448832513};
+escribir(p19);
 
-    Persona p41 = {"Diana", 50, 5, "LA CRUZ", "Santa Elena", 2, 1, 112614, 8, 4, 1, 1, "Guitarra", 3, 524961385};
-    escribir(p41);
+        
 
-    Persona p42 = {"Isabel", 49, 7, "PUNTARENAS", "Guacimal", 2, 1, 346954, 7, 4, 2, 1, "Correr", 2, 436066097};
-    escribir(p42);
+Persona p20 = {20, "name",   40, " Puntarenas", "canton", "distrito", " Mujer", " Soltero", 253105, 5, 4, " Vegano", " Mexicano", " Cantar", " Metal", 557364289};
+escribir(p20);
 
-    Persona p43 = {"Jorge", 26, 4, "BUENOS AIRES", "Volcán", 1, 1, 218657, 4, 4, 3, 4, "Cocinar", 8, 251134631};
-    escribir(p43);
+        
 
-    Persona p44 = {"Sandra", 30, 5, "MONTES DE ORO", "San Isidro", 2, 1, 666403, 6, 4, 3, 4, "Correr", 7, 477585290};
-    escribir(p44);
+Persona p21 = {21, "name",   48, " Alajuela", "canton", "distrito", " Mujer", " Divorciado", 138442, 2, 1, " Carnivoro", " Coreano", " Cantar", " Plancha", 705243648};
+escribir(p21);
 
-    Persona p45 = {"Gabriela", 19, 4, "PUNTARENAS", "Guacimal", 2, 3, 676822, 8, 0, 2, 4, "Dibujar", 7, 698194886};
-    escribir(p45);
+        
 
-    Persona p46 = {"Isaac", 52, 2, "BUENOS AIRES", "Volcán", 1, 1, 596146, 2, 2, 4, 2, "Cantar", 2, 474735454};
-    escribir(p46);
+Persona p22 = {22, "name",   39, " Puntarenas", "canton", "distrito", " Hombre", " Casado", 207656, 1, 2, " Omnivoro", " Ninguno", " Idiomas", " Ninguno", 692350022};
+escribir(p22);
 
-    Persona p47 = {"Alan", 44, 3, "AGUIRRE", "Quepos", 1, 1, 708964, 3, 4, 3, 4, "Ajedrez", 1, 597053677};
-    escribir(p47);
+        
 
-    Persona p48 = {"Bruno", 39, 6, "HOJANCHA", "Huacas", 1, 2, 75101, 6, 3, 2, 3, "Cantar", 3, 291709845};
-    escribir(p48);
+Persona p23 = {23, "name",   20, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Divorciado", 87179, 0, 4, " Herbivoro", " Ninguno", " Leer", " Electronica", 549075936};
+escribir(p23);
 
-    Persona p49 = {"Soledad", 32, 5, "COTO BRUS", "San Vito", 2, 4, 471099, 5, 2, 4, 4, "Correr", 7, 454691434};
-    escribir(p49);
+        
 
-    Persona p50 = {"Zul", 31, 1, "ESPARZA", "San Juan Grande", 1, 3, 282601, 2, 2, 2, 3, "Guitarra", 2, 521424187};
-    escribir(p50);
+Persona p24 = {24, "name",   29, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Soltero", 77341, 2, 1, " Carnivoro", " Criollo", " Leer", " Salsa", 495231020};
+escribir(p24);
+
+        
+
+Persona p25 = {25, "name",   24, " Cartago", "canton", "distrito", " Hombre", " Soltero", 538637, 5, 2, " Omnivoro", " Criollo", " Cantar", " Bachata", 689636910};
+escribir(p25);
+
+        
+
+Persona p26 = {26, "name",   42, " Alajuela", "canton", "distrito", " Hombre", " Soltero", 76142, 5, 1, " Herbivoro", " Ninguno", " Correr", " Salsa", 702404935};
+escribir(p26);
+
+        
+
+Persona p27 = {27, "name",   31, " Puntarenas", "canton", "distrito", " Prefiero no decirlo", " Soltero", 558374, 6, 0, " Herbivoro", " Coreano", " Ejercicio", " Salsa", 450014061};
+escribir(p27);
+
+        
+
+Persona p28 = {28, "name",   39, " San Jose", "canton", "distrito", " No binario", " Divorciado", 360792, 2, 0, " Omnivoro", " Coreano", " Guitarra", " Rap", 372060145};
+escribir(p28);
+
+        
+
+Persona p29 = {29, "name",   21, " San Jose", "canton", "distrito", " No binario", " Juntado", 737219, 8, 0, " Carnivoro", " Mediterraneo", " Ejercicio", " Reggaeton", 742679609};
+escribir(p29);
+
+        
+
+Persona p30 = {30, "name",   30, " Guanacaste", "canton", "distrito", " Mujer", " Juntado", 386951, 1, 3, " Omnivoro", " Criollo", " Leer", " Rancheras", 472749513};
+escribir(p30);
+
+        
+
+Persona p31 = {31, "name",   37, " Heredia", "canton", "distrito", " Mujer", " Divorciado", 384114, 2, 1, " Vegetariano", " Criollo", " Correr", " Balada", 562866850};
+escribir(p31);
+
+        
+
+Persona p32 = {32, "name",   30, " Limon", "canton", "distrito", " Mujer", " Juntado", 551478, 2, 3, " Carnivoro", " Dulce", " Cantar", " Salsa", 614068822};
+escribir(p32);
+
+        
+
+Persona p33 = {33, "name",   25, " Limon", "canton", "distrito", " Hombre", " Casado", 81108, 5, 0, " Omnivoro", " Ninguno", " Cantar", " Rap", 536709808};
+escribir(p33);
+
+        
+
+Persona p34 = {34, "name",   30, " Cartago", "canton", "distrito", " No binario", " Casado", 125865, 3, 0, " Omnivoro", " Dulce", " DibujarBailar", " Salsa", 707779887};
+escribir(p34);
+
+        
+
+Persona p35 = {35, "name",   23, " Heredia", "canton", "distrito", " Prefiero no decirlo", " Juntado", 70617, 8, 4, " Omnivoro", " Ninguno", " Idiomas", " Reggaeton", 197703317};
+escribir(p35);
+
+        
+
+Persona p36 = {36, "name",   30, " Alajuela", "canton", "distrito", " Hombre", " Casado", 244092, 0, 3, " Herbivoro", " Mediterraneo", " DibujarBailar", " Balada", 616383956};
+escribir(p36);
+
+        
+
+Persona p37 = {37, "name",   47, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Casado", 184908, 5, 1, " Vegano", " Criollo", " Leer", " Rap", 239993335};
+escribir(p37);
+
+        
+
+Persona p38 = {38, "name",   45, " Heredia", "canton", "distrito", " Mujer", " Divorciado", 585473, 7, 4, " Vegetariano", " Dulce", " Ejercicio", " Indie", 651083742};
+escribir(p38);
+
+        
+
+Persona p39 = {39, "name",   29, " Heredia", "canton", "distrito", " No binario", " Soltero", 304264, 5, 1, " Vegano", " Mediterraneo", " Guitarra", " Rancheras", 477803080};
+escribir(p39);
+
+        
+
+Persona p40 = {40, "name",   35, " San Jose", "canton", "distrito", " Mujer", " Juntado", 376225, 8, 3, " Vegano", " Dulce", " Correr", " Reggaeton", 347383831};
+escribir(p40);
+
+        
+
+Persona p41 = {41, "name",   36, " Cartago", "canton", "distrito", " Hombre", " Juntado", 518929, 3, 3, " Carnivoro", " Criollo", " Leer", " Salsa", 172889982};
+escribir(p41);
+
+        
+
+Persona p42 = {42, "name",   26, " San Jose", "canton", "distrito", " No binario", " Juntado", 477369, 4, 0, " Vegano", " Criollo", " Cantar", " Rancheras", 295654304};
+escribir(p42);
+
+        
+
+Persona p43 = {43, "name",   39, " Heredia", "canton", "distrito", " Mujer", " Casado", 360039, 6, 1, " Carnivoro", " Ninguno", " Guitarra", " Merengue", 588040450};
+escribir(p43);
+
+        
+
+Persona p44 = {44, "name",   24, " Heredia", "canton", "distrito", " No binario", " Casado", 574829, 7, 0, " Omnivoro", " Ninguno", " Leer", " Plancha", 327745362};
+escribir(p44);
+
+        
+
+Persona p45 = {45, "name",   28, " Guanacaste", "canton", "distrito", " No binario", " Soltero", 612153, 2, 2, " Vegetariano", " Dulce", " Cantar", " Pop", 620099299};
+escribir(p45);
+
+        
+
+Persona p46 = {46, "name",   45, " Limon", "canton", "distrito", " Mujer", " Divorciado", 380469, 6, 2, " Vegetariano", " Criollo", " Idiomas", " Merengue", 543272214};
+escribir(p46);
+
+        
+
+Persona p47 = {47, "name",   44, " Alajuela", "canton", "distrito", " Hombre", " Casado", 716810, 0, 1, " Carnivoro", " Criollo", " Cantar", " Metal", 657096129};
+escribir(p47);
+
+        
+
+Persona p48 = {48, "name",   29, " Heredia", "canton", "distrito", " Hombre", " Soltero", 595546, 2, 1, " Vegano", " Coreano", " Cantar", " Bachata", 154644921};
+escribir(p48);
+
+        
+
+Persona p49 = {49, "name",   43, " Limon", "canton", "distrito", " Mujer", " Divorciado", 208062, 7, 3, " Vegetariano", " Salado", " DibujarBailar", " Plancha", 159095845};
+escribir(p49);
+
+        
 
     cout<<"Las personas han sido ingresadas en el archivo satisfactoriamente."<<endl;
 }
@@ -702,7 +805,7 @@ Outputs:
         menuModificar();
     }
     else if(opcion == "4"){
-        modificarProvincia(pedirInt(pedir), pedirInt("Ingrese el numero de la nueva provincia: "));
+        modificarProvincia(pedirInt(pedir), pedirString("Ingrese el numero de la nueva provincia: "));
         menuModificar();
     }
     else if(opcion == "5"){
@@ -714,11 +817,11 @@ Outputs:
         menuModificar();
     }
     else if(opcion == "7"){
-        modificarSexo(pedirInt(pedir), pedirInt("Ingrese el nuevo sexo: "));
+        modificarSexo(pedirInt(pedir), pedirString("Ingrese el nuevo sexo: "));
         menuModificar();
     }
     else if(opcion == "8"){
-        modificarEstcivil(pedirInt(pedir), pedirInt("Ingrese el nuevo estado civil: "));
+        modificarEstcivil(pedirInt(pedir), pedirString("Ingrese el nuevo estado civil: "));
         menuModificar();
 
     }
@@ -738,12 +841,12 @@ Outputs:
 
     }
     else if(opcion == "12"){
-        modificarTipoalimentacion(pedirInt(pedir), pedirInt("Ingrese el nuevo tipo de alimentacion: "));
+        modificarTipoalimentacion(pedirInt(pedir), pedirString("Ingrese el nuevo tipo de alimentacion: "));
         menuModificar();
 
     }
     else if(opcion == "13"){
-        modificarTipocomida(pedirInt(pedir), pedirInt("Ingrese el nuevo tipo de Comida: "));
+        modificarTipocomida(pedirInt(pedir), pedirString("Ingrese el nuevo tipo de Comida: "));
         menuModificar();
 
     }
@@ -752,7 +855,7 @@ Outputs:
         menuModificar();
 
     }else if(opcion == "15"){
-        modificarTipomusica(pedirInt(pedir), pedirInt("Ingrese el nuevo tipo de musica: "));
+        modificarTipomusica(pedirInt(pedir), pedirString("Ingrese el nuevo tipo de musica: "));
         menuModificar();
     }else if(opcion == "16"){
         menuPrincipal();
