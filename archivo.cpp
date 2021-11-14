@@ -518,252 +518,252 @@ void cargarDatos(){
 //string nNombre, int nEdad, int nProvincia, string nCanton, string nDistrito, int nSexo, int nEstCivil, int nSueldo, 
 //int nAnnosTrabajando, int nCantHijos, int nTipoAlimentacion, int nTipoComida, string nHobby, int nTipoMusica, int nCedula
 
-Persona p0 = {0, "name",   50, " Alajuela", "canton", "distrito", " Hombre", " Divorciado", 235818, 0, 3, " Vegetariano", " Ninguno", " DibujarBailar", " Merengue", 545012188};
+Persona p0 = {0, "Enrique",   50, " Alajuela", "SAN JOSE", "San Fco.de Dos Ríos", "Hombre", "Divorciado", 235818, 0, 3, "Vegetariano", "Ninguno", "Dibujar", "Merengue", 545012188};
 escribir(p0);
 
         
 
-Persona p1 = {1, "name",   22, " Heredia", "canton", "distrito", " Prefiero no decirlo", " Juntado", 675292, 7, 2, " Vegetariano", " Mediterraneo", " Leer", " Rancheras", 219306035};
+Persona p1 = {1, "Fer",   22, " Heredia", "DESAMPARADOS", "San Rafael Arriba", "Prefiero no decirlo", "Juntado", 675292, 7, 2, "Vegetariano", "Mediterraneo", "Leer", "Rancheras", 219306035};
 escribir(p1);
 
         
 
-Persona p2 = {2, "name",   22, " Alajuela", "canton", "distrito", " Prefiero no decirlo", " Casado", 579926, 1, 1, " Omnivoro", " Ninguno", " DibujarBailar", " Rap", 618116829};
+Persona p2 = {2, "Ben",   22, " Alajuela", "SAN JOSE", "San Fco.de Dos Ríos", "Prefiero no decirlo", "Casado", 579926, 1, 1, "Omnivoro", "Ninguno", "Bailar", "Rap", 618116829};
 escribir(p2);
 
         
 
-Persona p3 = {3, "name",   49, " Alajuela", "canton", "distrito", " Hombre", " Juntado", 617355, 2, 3, " Vegetariano", " Criollo", " Ejercicio", " Plancha", 228110672};
+Persona p3 = {3, "Axel",   49, " Alajuela", "PURISCAL", "Barbacoas", "Hombre", "Juntado", 617355, 2, 3, "Vegetariano", "Criollo", "Ejercicio", "Plancha", 228110672};
 escribir(p3);
 
         
 
-Persona p4 = {4, "name",   24, " Alajuela", "canton", "distrito", " Prefiero no decirlo", " Soltero", 288376, 5, 2, " Vegetariano", " Coreano", " Correr", " Metal", 483620093};
+Persona p4 = {4, "Lao",   24, " Alajuela", "TARRAZU", "San Marcos", "Prefiero no decirlo", "Soltero", 288376, 5, 2, "Vegetariano", "Coreano", "Correr", "Metal", 483620093};
 escribir(p4);
 
         
 
-Persona p5 = {5, "name",   43, " Guanacaste", "canton", "distrito", " Mujer", " Soltero", 648240, 8, 0, " Carnivoro", " Mexicano", " Cantar", " Indie", 423575889};
+Persona p5 = {5, "Pamela",   43, " Guanacaste", "TARRAZU", "San Marcos", "Mujer", "Soltera", 648240, 8, 0, "Carnivoro", "Mexicano", "Cantar", "Indie", 423575889};
 escribir(p5);
 
         
 
-Persona p6 = {6, "name",   34, " Limon", "canton", "distrito", " No binario", " Juntado", 272338, 8, 3, " Vegano", " Ninguno", " Cantar", " Electronica", 341595615};
+Persona p6 = {6, "Sandra",   34, " Limon", "SANTA ANA", "Salitral", "Mujer", "Juntada", 272338, 8, 3, "Vegano", "Ninguno", "Cantar", "Electronica", 341595615};
 escribir(p6);
 
         
 
-Persona p7 = {7, "name",   26, " San Jose", "canton", "distrito", " Mujer", " Soltero", 104893, 7, 0, " Omnivoro", " Salado", " Leer", " Reggaeton", 741722988};
+Persona p7 = {7, "Diana",   26, " San Jose", "SAN JOSE", "Uruca", "Mujer", "Soltera", 104893, 7, 0, "Omnivoro", "Salado", "Leer", "Reggaeton", 741722988};
 escribir(p7);
 
         
 
-Persona p8 = {8, "name",   50, " Cartago", "canton", "distrito", " Hombre", " Soltero", 451472, 4, 0, " Vegetariano", " Criollo", " Idiomas", " Reggaeton", 581902812};
+Persona p8 = {8, "Mauricio",   50, " Cartago", "ALAJUELITA", "San Antonio", "Hombre", "Soltero", 451472, 4, 0, "Vegetariano", "Criollo", "Idiomas", "Reggaeton", 581902812};
 escribir(p8);
 
         
 
-Persona p9 = {9, "name",   37, " Heredia", "canton", "distrito", " Hombre", " Casado", 318752, 6, 3, " Vegano", " Ninguno", " Ejercicio", " Pop", 231584042};
+Persona p9 = {9, "Mauricio",   37, " Heredia", "MONTES DE OCA", "Sabanilla", "Hombre", "Casado", 318752, 6, 3, "Vegano", "Ninguno", "Ejercicio", "Pop", 231584042};
 escribir(p9);
 
         
 
-Persona p10 = {10, "name",   29, " Heredia", "canton", "distrito", " Hombre", " Casado", 314253, 2, 4, " Herbivoro", " Dulce", " Idiomas", " Bachata", 448297849};
+Persona p10 = {10, "William",   29, " Heredia", "TURRUBARES", "San Pablo", "Hombre", "Casado", 314253, 2, 4, "Herbivoro", "Dulce", "Idiomas", "Bachata", 448297849};
 escribir(p10);
 
         
 
-Persona p11 = {11, "name",   38, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Juntado", 130989, 0, 2, " Carnivoro", " Mexicano", " Ejercicio", " Balada", 402095587};
+Persona p11 = {11, "Ericka",   38, " San Jose", "ALAJUELITA", "San Antonio", "Prefiero no decirlo", "Juntado", 130989, 0, 2, "Carnivoro", "Mexicano", "Ejercicio", "Balada", 402095587};
 escribir(p11);
 
         
 
-Persona p12 = {12, "name",   33, " Guanacaste", "canton", "distrito", " Prefiero no decirlo", " Divorciado", 448634, 7, 3, " Vegetariano", " Criollo", " Cantar", " Reggaeton", 539990874};
+Persona p12 = {12, "Ramses",   33, " Guanacaste", "TURRUBARES", "San Juan de Mata", "Prefiero no decirlo", "Divorciado", 448634, 7, 3, "Vegetariano", "Criollo", "Cantar", "Reggaeton", 539990874};
 escribir(p12);
 
         
 
-Persona p13 = {13, "name",   19, " Limon", "canton", "distrito", " Prefiero no decirlo", " Soltero", 123116, 7, 3, " Omnivoro", " Mediterraneo", " Correr", " Balada", 601478504};
+Persona p13 = {13, "Mariana",   19, " Limon", "DOTA", "Jardín", "Prefiero no decirlo", "Soltero", 123116, 7, 3, "Omnivoro", "Mediterraneo", "Correr", "Balada", 601478504};
 escribir(p13);
 
         
 
-Persona p14 = {14, "name",   46, " Limon", "canton", "distrito", " Mujer", " Soltero", 221785, 1, 2, " Herbivoro", " Salado", " Cantar", " Rancheras", 299947816};
+Persona p14 = {14, "Allison",   46, " Limon", "CURRIDABAT", "Tirrases", "Mujer", "Soltera", 221785, 1, 2, "Herbivoro", "Salado", "Cantar", "Rancheras", 299947816};
 escribir(p14);
 
         
 
-Persona p15 = {15, "name",   19, " Cartago", "canton", "distrito", " Hombre", " Juntado", 73888, 6, 3, " Carnivoro", " Ninguno", " Guitarra", " Electronica", 635722895};
+Persona p15 = {15, "Ronald",   19, " Cartago", "CURRIDABAT", "Curridabat", "Hombre", "Juntado", 73888, 6, 3, "Carnivoro", "Ninguno", "Guitarra", "Electronica", 635722895};
 escribir(p15);
 
         
 
-Persona p16 = {16, "name",   42, " Limon", "canton", "distrito", " No binario", " Divorciado", 630144, 0, 0, " Vegano", " Salado", " Ejercicio", " Bachata", 385522440};
+Persona p16 = {16, "Glen",   42, " Limon", "PEREZ ZELEDON", "San Isidro de El General", "Hombre", "Divorciado", 630144, 0, 0, "Vegano", "Salado", "Ejercicio", "Bachata", 385522440};
 escribir(p16);
 
         
 
-Persona p17 = {17, "name",   30, " Limon", "canton", "distrito", " Mujer", " Divorciado", 362763, 5, 1, " Herbivoro", " Mexicano", " Cantar", " Electronica", 354175593};
+Persona p17 = {17, "Mariel",   30, " Limon", "LEON CORTES", "San Pablo", " Mujer", "Divorciada", 362763, 5, 1, "Herbivoro", "Mexicano", "Cantar", "Electronica", 354175593};
 escribir(p17);
 
         
 
-Persona p18 = {18, "name",   51, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Soltero", 466411, 6, 0, " Vegano", " Criollo", " Idiomas", " Reggaeton", 764538659};
+Persona p18 = {18, "Leonardo",   51, " San Jose", "PEREZ ZELEDON", "San Isidro de El General", "Prefiero no decirlo", "Soltero", 466411, 6, 0, "Vegano", "Criollo", "Idiomas", "Reggaeton", 764538659};
 escribir(p18);
 
         
 
-Persona p19 = {19, "name",   31, " Limon", "canton", "distrito", " Prefiero no decirlo", " Juntado", 431982, 7, 2, " Vegetariano", " Mexicano", " Guitarra", " Merengue", 448832513};
+Persona p19 = {19, "Fabricio",   31, " Limon", "LEON CORTES", "San Antonio", "Prefiero no decirlo", "Juntado", 431982, 7, 2, "Vegetariano", "Mexicano", "Guitarra", "Merengue", 448832513};
 escribir(p19);
 
         
 
-Persona p20 = {20, "name",   40, " Puntarenas", "canton", "distrito", " Mujer", " Soltero", 253105, 5, 4, " Vegano", " Mexicano", " Cantar", " Metal", 557364289};
+Persona p20 = {20, "Alejandra",   40, " Puntarenas", "PEREZ ZELEDON", "Páramo", "Mujer", "Soltera", 253105, 5, 4, "Vegano", "Mexicano", "Cantar", "Metal", 557364289};
 escribir(p20);
 
         
 
-Persona p21 = {21, "name",   48, " Alajuela", "canton", "distrito", " Mujer", " Divorciado", 138442, 2, 1, " Carnivoro", " Coreano", " Cantar", " Plancha", 705243648};
+Persona p21 = {21, "Guiselle",   48, " Alajuela", "ALAJUELA", "La Garita", "Mujer", "Divorciada", 138442, 2, 1, "Carnivoro", "Coreano", "Cantar", "Plancha", 705243648};
 escribir(p21);
 
         
 
-Persona p22 = {22, "name",   39, " Puntarenas", "canton", "distrito", " Hombre", " Casado", 207656, 1, 2, " Omnivoro", " Ninguno", " Idiomas", " Ninguno", 692350022};
+Persona p22 = {22, "Joan",   39, " Puntarenas", "ALAJUELA", "Desamparados", "Hombre", "Casado", 207656, 1, 2, "Omnivoro", "Ninguno", "Idiomas", "Ninguno", 692350022};
 escribir(p22);
 
         
 
-Persona p23 = {23, "name",   20, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Divorciado", 87179, 0, 4, " Herbivoro", " Ninguno", " Leer", " Electronica", 549075936};
+Persona p23 = {23, "Max",   20, " San Jose", "SAN RAMON", "Volio", "Prefiero no decirlo", "Divorciado", 87179, 0, 4, "Herbivoro", "Ninguno", "Leer", "Electronica", 549075936};
 escribir(p23);
 
         
 
-Persona p24 = {24, "name",   29, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Soltero", 77341, 2, 1, " Carnivoro", " Criollo", " Leer", " Salsa", 495231020};
+Persona p24 = {24, "Laura",   29, " San Jose", "SAN RAMON", "Piedades Norte", "Prefiero no decirlo", "Soltero", 77341, 2, 1, "Carnivoro", "Criollo", "Leer", "Salsa", 495231020};
 escribir(p24);
 
         
 
-Persona p25 = {25, "name",   24, " Cartago", "canton", "distrito", " Hombre", " Soltero", 538637, 5, 2, " Omnivoro", " Criollo", " Cantar", " Bachata", 689636910};
+Persona p25 = {25, "Albert",   24, " Cartago", "LEON CORTES", "San Andrés", "Hombre", "Soltero", 538637, 5, 2, "Omnivoro", "Criollo", "Cantar", "Bachata", 689636910};
 escribir(p25);
 
         
 
-Persona p26 = {26, "name",   42, " Alajuela", "canton", "distrito", " Hombre", " Soltero", 76142, 5, 1, " Herbivoro", " Ninguno", " Correr", " Salsa", 702404935};
+Persona p26 = {26, "Alejandro",   42, " Alajuela", "GRECIA", "Bolívar", "Hombre", "Soltero", 76142, 5, 1, "Herbivoro", "Ninguno", "Correr", "Salsa", 702404935};
 escribir(p26);
 
         
 
-Persona p27 = {27, "name",   31, " Puntarenas", "canton", "distrito", " Prefiero no decirlo", " Soltero", 558374, 6, 0, " Herbivoro", " Coreano", " Ejercicio", " Salsa", 450014061};
+Persona p27 = {27, "Carlos",   31, " Puntarenas", "SAN RAMON", "San Juan", "Prefiero no decirlo", "Soltero", 558374, 6, 0, "Herbivoro", "Coreano", "Ejercicio", "Salsa", 450014061};
 escribir(p27);
 
         
 
-Persona p28 = {28, "name",   39, " San Jose", "canton", "distrito", " No binario", " Divorciado", 360792, 2, 0, " Omnivoro", " Coreano", " Guitarra", " Rap", 372060145};
+Persona p28 = {28, "David",   39, " San Jose", "SAN MATEO", "Desmonte", "Hombre", "Divorciado", 360792, 2, 0, "Omnivoro", "Coreano", "Guitarra", "Rap", 372060145};
 escribir(p28);
 
         
 
-Persona p29 = {29, "name",   21, " San Jose", "canton", "distrito", " No binario", " Juntado", 737219, 8, 0, " Carnivoro", " Mediterraneo", " Ejercicio", " Reggaeton", 742679609};
+Persona p29 = {29, "Jazmin",   21, " San Jose", "GRECIA", "San Roque", "Mujer", "Juntada", 737219, 8, 0, "Carnivoro", "Mediterraneo", "Ejercicio", "Reggaeton", 742679609};
 escribir(p29);
 
         
 
-Persona p30 = {30, "name",   30, " Guanacaste", "canton", "distrito", " Mujer", " Juntado", 386951, 1, 3, " Omnivoro", " Criollo", " Leer", " Rancheras", 472749513};
+Persona p30 = {30, "Ursula",   30, " Guanacaste", "ALAJUELA", "San Antonio", "Mujer", "Juntada", 386951, 1, 3, "Omnivoro", "Criollo", "Leer", " ancheras", 472749513};
 escribir(p30);
 
         
 
-Persona p31 = {31, "name",   37, " Heredia", "canton", "distrito", " Mujer", " Divorciado", 384114, 2, 1, " Vegetariano", " Criollo", " Correr", " Balada", 562866850};
+Persona p31 = {31, "Ariel",   37, " Heredia", "GRECIA", "San Isidro", "Mujer", "Divorciada", 384114, 2, 1, "Vegetariano", "Criollo", "Correr", "Balada", 562866850};
 escribir(p31);
 
         
 
-Persona p32 = {32, "name",   30, " Limon", "canton", "distrito", " Mujer", " Juntado", 551478, 2, 3, " Carnivoro", " Dulce", " Cantar", " Salsa", 614068822};
+Persona p32 = {32, "Tania",   30, " Limon", "ATENAS", "Concepción", "Mujer", "Juntada", 551478, 2, 3, "Carnivoro", "Dulce", "Cantar", "Salsa", 614068822};
 escribir(p32);
 
         
 
-Persona p33 = {33, "name",   25, " Limon", "canton", "distrito", " Hombre", " Casado", 81108, 5, 0, " Omnivoro", " Ninguno", " Cantar", " Rap", 536709808};
+Persona p33 = {33, "Ronald",   25, " Limon", "NARANJO", "San José", "Hombre", "Casado", 81108, 5, 0, "Omnivoro", "Ninguno", "Cantar", "Rap", 536709808};
 escribir(p33);
 
         
 
-Persona p34 = {34, "name",   30, " Cartago", "canton", "distrito", " No binario", " Casado", 125865, 3, 0, " Omnivoro", " Dulce", " DibujarBailar", " Salsa", 707779887};
+Persona p34 = {34, "Erick",   30, " Cartago", "ATENAS", "Concepción", "Hombre", "Casado", 125865, 3, 0, "Omnivoro", "Dulce", "DibujarBailar", "Salsa", 707779887};
 escribir(p34);
 
         
 
-Persona p35 = {35, "name",   23, " Heredia", "canton", "distrito", " Prefiero no decirlo", " Juntado", 70617, 8, 4, " Omnivoro", " Ninguno", " Idiomas", " Reggaeton", 197703317};
+Persona p35 = {35, "Angelica",   23, " Heredia", "PALMARES", "Zaragoza", "Prefiero no decirlo", " Juntado", 70617, 8, 4, " Omnivoro", " Ninguno", " Idiomas", " Reggaeton", 197703317};
 escribir(p35);
 
         
 
-Persona p36 = {36, "name",   30, " Alajuela", "canton", "distrito", " Hombre", " Casado", 244092, 0, 3, " Herbivoro", " Mediterraneo", " DibujarBailar", " Balada", 616383956};
+Persona p36 = {36, "Jose",   30, " Alajuela", "PALMARES", "Palmares", "Hombre", "Casado", 244092, 0, 3, "Herbivoro", "Mediterraneo", "DibujarBailar", "Balada", 616383956};
 escribir(p36);
 
         
 
-Persona p37 = {37, "name",   47, " San Jose", "canton", "distrito", " Prefiero no decirlo", " Casado", 184908, 5, 1, " Vegano", " Criollo", " Leer", " Rap", 239993335};
+Persona p37 = {37, "Reyner",   47, " San Jose", "SAN CARLOS", "Fortuna", "Prefiero no decirlo", "Casado", 184908, 5, 1, "Vegano", "Criollo", "Leer", "Rap", 239993335};
 escribir(p37);
 
         
 
-Persona p38 = {38, "name",   45, " Heredia", "canton", "distrito", " Mujer", " Divorciado", 585473, 7, 4, " Vegetariano", " Dulce", " Ejercicio", " Indie", 651083742};
+Persona p38 = {38, "Melina",   45, " Heredia", "ATENAS", "Mercedes", "Mujer", "Divorciada", 585473, 7, 4, "Vegetariano", "Dulce", "Ejercicio", "Indie", 651083742};
 escribir(p38);
 
         
 
-Persona p39 = {39, "name",   29, " Heredia", "canton", "distrito", " No binario", " Soltero", 304264, 5, 1, " Vegano", " Mediterraneo", " Guitarra", " Rancheras", 477803080};
+Persona p39 = {39, "Frida",   29, " Heredia", "SAN CARLOS", "Fortuna", "Mujer", "Soltera", 304264, 5, 1, "Vegano", "Mediterraneo", "Guitarra", "Rancheras", 477803080};
 escribir(p39);
 
         
 
-Persona p40 = {40, "name",   35, " San Jose", "canton", "distrito", " Mujer", " Juntado", 376225, 8, 3, " Vegano", " Dulce", " Correr", " Reggaeton", 347383831};
+Persona p40 = {40, "Antonia",   35, " San Jose", "SAN CARLOS", "Florencia", "Mujer", "Juntada", 376225, 8, 3, "Vegano", "Dulce", "Correr", "Reggaeton", 347383831};
 escribir(p40);
 
         
 
-Persona p41 = {41, "name",   36, " Cartago", "canton", "distrito", " Hombre", " Juntado", 518929, 3, 3, " Carnivoro", " Criollo", " Leer", " Salsa", 172889982};
+Persona p41 = {41, "Zul",   36, " Cartago", "ATENAS", "Mercedes", "Hombre", "Juntado", 518929, 3, 3, "Carnivoro", "Criollo", "Leer", "Salsa", 172889982};
 escribir(p41);
 
         
 
-Persona p42 = {42, "name",   26, " San Jose", "canton", "distrito", " No binario", " Juntado", 477369, 4, 0, " Vegano", " Criollo", " Cantar", " Rancheras", 295654304};
+Persona p42 = {42, "Emily",   26, " San Jose", "NARANJO", "San Jerónimo", "Mujer", " Juntada", 477369, 4, 0, " Vegano", " Criollo", " Cantar", " Rancheras", 295654304};
 escribir(p42);
 
         
 
-Persona p43 = {43, "name",   39, " Heredia", "canton", "distrito", " Mujer", " Casado", 360039, 6, 1, " Carnivoro", " Ninguno", " Guitarra", " Merengue", 588040450};
+Persona p43 = {43, "Andrea",   39, " Heredia", "UPALA", "Upala", "Mujer", " Casada", 360039, 6, 1, " Carnivoro", " Ninguno", " Guitarra", " Merengue", 588040450};
 escribir(p43);
 
         
 
-Persona p44 = {44, "name",   24, " Heredia", "canton", "distrito", " No binario", " Casado", 574829, 7, 0, " Omnivoro", " Ninguno", " Leer", " Plancha", 327745362};
+Persona p44 = {44, "Alex",   24, " Heredia", "CARTAGO", "Oriental", "Hombre", " Casado", 574829, 7, 0, " Omnivoro", " Ninguno", " Leer", " Plancha", 327745362};
 escribir(p44);
 
         
 
-Persona p45 = {45, "name",   28, " Guanacaste", "canton", "distrito", " No binario", " Soltero", 612153, 2, 2, " Vegetariano", " Dulce", " Cantar", " Pop", 620099299};
+Persona p45 = {45, "Julio",   28, " Guanacaste", "LA UNION", "San Rafael", "Hombre", " Soltero", 612153, 2, 2, " Vegetariano", " Dulce", " Cantar", " Pop", 620099299};
 escribir(p45);
 
         
 
-Persona p46 = {46, "name",   45, " Limon", "canton", "distrito", " Mujer", " Divorciado", 380469, 6, 2, " Vegetariano", " Criollo", " Idiomas", " Merengue", 543272214};
+Persona p46 = {46, "Anamarta",   45, " Limon", "CARTAGO", "Oriental", "Mujer", "Divorciada", 380469, 6, 2, "Vegetariano", "Criollo", "Idiomas", "Merengue", 543272214};
 escribir(p46);
 
         
 
-Persona p47 = {47, "name",   44, " Alajuela", "canton", "distrito", " Hombre", " Casado", 716810, 0, 1, " Carnivoro", " Criollo", " Cantar", " Metal", 657096129};
+Persona p47 = {47, "Eladio",   44, " Alajuela", "LA UNION", "Tres Ríos", "Hombre", "Casado", 716810, 0, 1, "Carnivoro", "Criollo", "Cantar", "Metal", 657096129};
 escribir(p47);
 
         
 
-Persona p48 = {48, "name",   29, " Heredia", "canton", "distrito", " Hombre", " Soltero", 595546, 2, 1, " Vegano", " Coreano", " Cantar", " Bachata", 154644921};
+Persona p48 = {48, "Steven",   29, " Heredia", "LA UNION", "Tres Ríos", "Hombre", "Soltero", 595546, 2, 1, "Vegano", "Coreano", "Cantar", "Bachata", 154644921};
 escribir(p48);
 
         
 
-Persona p49 = {49, "name",   43, " Limon", "canton", "distrito", " Mujer", " Divorciado", 208062, 7, 3, " Vegetariano", " Salado", " DibujarBailar", " Plancha", 159095845};
+Persona p49 = {49, "Marleny",   43, " Limon", "TURRIALBA", "Turrialba", "Mujer", "Divorciada", 208062, 7, 3, "Vegetariano", "Salado", "Dibujar", "Plancha", 159095845};
 escribir(p49);
 
         
