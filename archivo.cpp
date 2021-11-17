@@ -23,6 +23,38 @@ struct Persona{
     int cedula;
 	
 };
+struct Indice{
+    int posicion;
+
+    Indice *sigInd;
+
+    Indice(int nPosicion){
+        posicion= nPosicion;
+
+        sigInd=NULL;
+    }
+};
+
+struct nodoArbolDecision{
+    int cantidad;
+    string nivel;
+    string valor;
+
+    nodoArbolDecision *sigNodo;
+    nodoArbolDecision *sublistaHijos;
+    Indice *sigInd;
+    
+    nodoArbolDecision(int nCantidad, string nNivel, string nValor){
+        cantidad= nCantidad;
+        nivel= nNivel;
+        valor= nValor;
+
+        sigNodo= NULL;
+        sigInd= NULL;
+        sublistaHijos=NULL;
+    }
+
+};
 /*
 void setNombre(Persona *p, int nNombre){p->nombre= nNombre;}
 void setEdad(Persona *p, int nEdad){p->edad= nEdad;}
@@ -194,6 +226,7 @@ int buscarPos(int id){
 }
 
 void buscarPorPos(int reg){
+    //Se le da una posicion, y busca la persona en esa posicion, 
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     Persona p;
         if(archivo.fail()){
@@ -207,6 +240,25 @@ void buscarPorPos(int reg){
     <<p.annosTrabajando<<" Cantidad de Hijos: "<<p.cantHijos<<"\nTipo de Alimentacion: "<<p.tipoAlimentacion<<" Tipo de Comida: "
     <<p.tipoComida<<" Hobby: "<<p.hobby<<" Tipo de Musica: "<<p.tipoMusica<<endl;
 	archivo.close();
+}
+
+int tamannoArchivo(){
+	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+	Persona p;
+    int contador = 0;
+
+	if(archivo.fail()){
+		cout<<"\nNo se pudo abrir el archivo";
+		exit(1);
+	}
+	archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+
+	while(!archivo.eof()){
+        contador = contador + 1;
+		archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+	}
+    archivo.close();
+    return contador;
 }
 
 void modificarNombre(int cedula, string nNombre){
@@ -883,25 +935,235 @@ Outputs:
     cin>>opcion;
     if(opcion=="1"){
         buscarId(pedirInt("Ingrese la cedula de la persona a buscar: "));
-        menuPrincipal();
+        
     }else if(opcion=="2"){
         buscarNombre(pedirString("Ingrese el nombre la persona a buscar: "));
-        menuPrincipal();
+        
     }else if(opcion=="3"){
         buscarPorPos(pedirInt("Ingrese la posicion en el archivo de la persona a buscar: "));
-        menuPrincipal();
+        
     }else if(opcion=="4"){
         menuModificar();
     }else if(opcion=="5"){
         cout<<"\n\nSaliendo...\n\n";
-        cout<<"Gracias por usar nuestro sistema! (Profe porfa ponganos 100)"<<endl;
+        cout<<"Gracias por usar nuestro sistema!"<<endl;
         system("pause");
+        return;
+    }else if(opcion=="6"){
         return;
     }else{
         cout<<"Ingrese una opcion valida.";
         menuPrincipal();
     }
 }
+
+bool idEnLista(nodoArbolDecision *nodo, int id){
+    Indice *temp = nodo->sigInd;
+    while(temp != NULL){
+        if(temp->posicion == id){
+            return true;
+        }
+        temp = temp->sigInd;
+    }
+    return false;
+}
+
+Persona devPers(int reg){
+    //Se le da una posicion, y busca la persona en esa posicion, 
+    fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+    Persona p;
+        if(archivo.fail()){
+		cout<<"No se pudo abrir el archivo"<<endl;
+		exit(1);
+	}
+    archivo.seekp(reg*sizeof(p), ios::beg);
+    archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+    archivo.close();
+    return p;
+}
+
+string devParametro(string parametro, Persona p){
+    string porRevisar;
+    if(parametro=="nombre"){            porRevisar= p.nombre;
+    }else if(parametro=="edad"){        porRevisar= p.edad;
+    }else if(parametro=="provincia"){   porRevisar= p.provincia;
+    }else if(parametro=="canton"){      porRevisar= p.canton;
+    }else if(parametro=="distrito"){    porRevisar= p.distrito;
+    }else if(parametro=="sexo"){        porRevisar= p.sexo;
+    }else if(parametro=="estCivil"){    porRevisar= p.estCivil;
+    }else if(parametro=="sueldo"){      porRevisar= p.sueldo;
+    }else if(parametro=="annosTrabajando"){ porRevisar=p.annosTrabajando;
+    }else if(parametro=="cantHijos"){       porRevisar= p.cantHijos;
+    }else if(parametro=="tipoAlimentacion"){porRevisar=p.tipoAlimentacion;
+    }else if(parametro=="tipoComida"){  porRevisar= p.tipoComida;
+    }else if(parametro=="hobby"){       porRevisar= p.hobby;
+    }else if(parametro=="tipoMusica"){  porRevisar= p.tipoMusica;
+    }else if(parametro=="cedula"){      porRevisar= p.cedula;           
+    }
+    return porRevisar;    
+}
+
+void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsuario, int profFija, int profDinamica, string paramEnviar){
+    if(persTemp.id==49){cout<<"todos entraron de alguna manera"<<endl;}
+    if( (profDinamica>(profFija-2)) && (profDinamica<profFija) ){
+        if(nodo->sublistaHijos==NULL){
+            nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar);
+            Indice *nI= new Indice(persTemp.id);
+            nN->sigInd = nI;
+            nodo->sublistaHijos=nN;
+            return;
+        }
+        nodoArbolDecision *temp= nodo->sublistaHijos;
+        nodoArbolDecision *temp2;
+
+        while(temp!=NULL){
+            if(temp->sigNodo!=NULL){
+                temp2=temp;
+            }
+            if (paramEnviar==temp->valor){
+                temp->cantidad= temp->cantidad+1;
+                Indice *indTemp= temp->sigInd;
+                while(indTemp->sigInd!=NULL){
+                    indTemp=indTemp->sigInd;
+                }
+                Indice *nI= new Indice(persTemp.id);
+                indTemp->sigInd=nI;
+            }
+            temp= temp->sigNodo;
+        }
+        nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar);
+        Indice *nI= new Indice(persTemp.id);
+        nN->sigInd=nI;
+        temp2->sigNodo= nN;
+
+    }
+    if(idEnLista(nodo, persTemp.id)==true){
+        nodoArbolDecision *tempSubLista= nodo->sublistaHijos;
+        profDinamica+=1;
+        while(tempSubLista!=NULL){
+            agregarPersona(tempSubLista, persTemp, codigoUsuario, profFija, profDinamica, paramEnviar);
+            tempSubLista= tempSubLista->sigNodo;
+        }
+    }else{
+        return;
+    }
+    
+
+}
+void crearArbol(){
+    int cantNiveles= pedirInt("Ingrese cuantos elementos desea analizar en el arbol:");
+    if(cantNiveles<3){
+        cout<<"El minimo de niveles por crear es 3."<<endl;
+        crearArbol();
+    }
+    
+    string nivelesGeneral[15]={"Nombre", "Edad", "Provincia", "Canton", "Distrito", "Sexo", "Estado Civil", "Sueldo", "Anos Trabajando", "Cantidad Hijos", "Tipo Alimentacion", "Tipo Comida", "Hobby", "Tipo de Musica", "Cedula"};
+    string parametrosCod[15]={"nombre", "edad", "provincia", "canton", "distrito", "sexo", "estCivil", "sueldo", "annosTrabajando", "cantHijos", "tipoAlimentacion", "tipoComida", "hobby", "tipoMusica", "cedula"};
+
+    cout<<"Ingrese el numero de su nivel deseado uno a la vez."<<endl;
+    cout<<"Los niveles disponibles son: \n1-Nombre\t\t2-Edad\t\t3-Provincia\t4-Canton\t\t5-Distrito\n6-Sexo\t\t\t7-Estado Civil\t8-Sueldo\t9-Anos Trabajando\t10-Cantidad Hijos\n11-Tipo Alimentacion\t12-Tipo Comida\t13-Hobby\t14-Tipo de Musica\t15-Cedula"<<endl;
+    string nivelesUsuario[15]={};
+    string codigosUsuario[15]={};
+
+    int i=0;
+    while (i!=cantNiveles){
+        int opcion;
+        cin>>opcion;
+        nivelesUsuario[i]= nivelesGeneral[opcion-1];
+        codigosUsuario[i]= parametrosCod[opcion-1];
+        i+=1;
+    }
+
+    cout<<"Los niveles ingresados fueron:";
+    int j= 0;
+    while(j!=cantNiveles){
+        cout<<", "<<nivelesUsuario[j];
+        j+=1;
+    }
+    cout<<endl;
+    int cant = tamannoArchivo();
+    cout<< "En el archivo hay "<< cant << " personas "<<endl;
+
+    nodoArbolDecision *raiz= new nodoArbolDecision(cant, "Raiz", "--");
+
+    Indice *nInd= new Indice(0);        //se crea un primer indice
+    i=1;
+    raiz->sigInd= nInd;                 //le asignamos a la raiz la lista de personas
+    while (i!=cant){                    //ciclo que crea los valores tipo indice para la raiz
+        Indice *tempInd= new Indice(i); //crea uno temporal
+        nInd->sigInd=tempInd;           //le asigna que el siguiente del ultimo es 
+        nInd= tempInd;                  //los reemplazo
+        i+=1;
+    }
+
+    int q= 0;
+    while(q!= cantNiveles){
+        int i=0;
+        while(i!= cant){
+            cout<<i<<endl;
+            Persona persTemp= devPers(i);
+            cout<<persTemp.nombre<<endl;
+            string paramEnviar= devParametro(codigosUsuario[q], persTemp);
+            agregarPersona(raiz, persTemp, codigosUsuario[q], q, 0, paramEnviar);
+            i+=1;
+        }
+        q+=1;
+    }
+    cout<<"Se termino al fin"<<endl;
+
+    /*
+    while(temp!= cantNiveles){ //revisar todos los niveles que el usuario pidio
+        int q=0;        //contador personas
+        int w=0;        //contador para insertar personas en array, no puede avanzar siempre
+        int listaParametro[60]; //Arreglo con gente que si cumple con la comparacion 
+
+        string parametro= parametrosCod[temp]; //parametro pedido por el usuario ge. nombre
+        string porRevisar;
+        
+        while(q!=cant){         //Revisar todas las personas, a ver cuales encajan
+            fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
+            if(archivo.fail()){
+                cout<<"\nNo se pudo abrir el archivo";
+                exit(1);
+            }
+            Persona p;
+            archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+            if(parametro=="nombre"){            porRevisar= p.nombre;
+            }else if(parametro=="edad"){        porRevisar= p.edad;
+            }else if(parametro=="provincia"){   porRevisar= p.provincia;
+            }else if(parametro=="canton"){      porRevisar= p.canton;
+            }else if(parametro=="distrito"){    porRevisar= p.distrito;
+            }else if(parametro=="sexo"){        porRevisar= p.sexo;
+            }else if(parametro=="estCivil"){    porRevisar= p.estCivil;
+            }else if(parametro=="sueldo"){      porRevisar= p.sueldo;
+            }else if(parametro=="annosTrabajando"){porRevisar=p.annosTrabajando;
+            }else if(parametro=="cantHijos"){   porRevisar= p.cantHijos;
+            }else if(parametro=="tipoAlimentacion"){porRevisar=p.tipoAlimentacion;
+            }else if(parametro=="tipoComida"){  porRevisar= p.tipoComida;
+            }else if(parametro=="hobby"){       porRevisar= p.hobby;
+            }else if(parametro=="tipoMusica"){  porRevisar= p.tipoMusica;
+            }else if(parametro=="cedula"){      porRevisar= p.cedula;           
+            }    
+            while(!archivo.eof()){
+                
+                archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
+            }
+            archivo.close();
+
+        }
+        Nivel *nN= new Nivel(0, nivelesUsuario[0], "--");
+
+    }*/
+
+
+
+
+
+
+
+
+}
+
 int main(){
     ofstream archivo("archivobinario.txt");
     cout<<"\n\n\t\tCargando Datos...\n\n";
@@ -911,5 +1173,6 @@ int main(){
     //cout<<"Se termino de modificar"<<endl;
     //buscarId(521424187);
 	menuPrincipal();
+    crearArbol();
 	return 0;
 }
