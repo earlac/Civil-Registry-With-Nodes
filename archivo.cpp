@@ -582,8 +582,7 @@ escribir(p1);
 
 Persona p2 = {2, "Ben",   22, " Alajuela", "SAN JOSE", "San Fco.de Dos Ríos", "Prefiero no decirlo", "Casado", 579926, 1, 1, "Omnivoro", "Ninguno", "Bailar", "Rap", 618116829};
 escribir(p2);
-
-        
+     
 
 Persona p3 = {3, "Axel",   49, " Alajuela", "PURISCAL", "Barbacoas", "Hombre", "Juntado", 617355, 2, 3, "Vegetariano", "Criollo", "Ejercicio", "Plancha", 228110672};
 escribir(p3);
@@ -624,7 +623,7 @@ Persona p10 = {10, "William",   29, " Heredia", "TURRUBARES", "San Pablo", "Homb
 escribir(p10);
 
         
-
+/*
 Persona p11 = {11, "Ericka",   38, " San Jose", "ALAJUELITA", "San Antonio", "Prefiero no decirlo", "Juntado", 130989, 0, 2, "Carnivoro", "Mexicano", "Ejercicio", "Balada", 402095587};
 escribir(p11);
 
@@ -817,7 +816,7 @@ escribir(p48);
 
 Persona p49 = {49, "Marleny",   43, " Limon", "TURRIALBA", "Turrialba", "Mujer", "Divorciada", 208062, 7, 3, "Vegetariano", "Salado", "Dibujar", "Plancha", 159095845};
 escribir(p49);
-
+*/
         
 
     cout<<"Las personas han sido ingresadas en el archivo satisfactoriamente."<<endl;
@@ -917,45 +916,27 @@ Outputs:
     }
 }
 
-void menuPrincipal(){
-/*
-Inputs: 
-        Number of choice.
-Process:
-        Displays the main menu for user to choose between the opcions.
-Outputs:
-        Respective function in the system.
-*/
-    cout<<"\n\n"<<endl;
-    cout<<"----------------------------------------------------------------"<<endl;
-    cout<<"--------------Avance del segundo proyecto: Archivos-------------"<<endl;
-    cout<<"----------------------------------------------------------------\n"<<endl;
-    cout<<"Ingrese el numero de la opcion deseada: \n 1- Buscar persona por ID\n 2- Buscar persona por nombre\n 3- Buscar persona por posicion \n 4- Modificar persona \n 5- Salir\n\nNumero: ";
-    string opcion;
-    cin>>opcion;
-    if(opcion=="1"){
-        buscarId(pedirInt("Ingrese la cedula de la persona a buscar: "));
-        
-    }else if(opcion=="2"){
-        buscarNombre(pedirString("Ingrese el nombre la persona a buscar: "));
-        
-    }else if(opcion=="3"){
-        buscarPorPos(pedirInt("Ingrese la posicion en el archivo de la persona a buscar: "));
-        
-    }else if(opcion=="4"){
-        menuModificar();
-    }else if(opcion=="5"){
-        cout<<"\n\nSaliendo...\n\n";
-        cout<<"Gracias por usar nuestro sistema!"<<endl;
-        system("pause");
-        return;
-    }else if(opcion=="6"){
-        return;
-    }else{
-        cout<<"Ingrese una opcion valida.";
-        menuPrincipal();
+
+
+void leerArbol(nodoArbolDecision *nodo){
+    int hojas = 0;
+    if(nodo == NULL) return ;
+
+    if(nodo->sublistaHijos == NULL){
+        hojas++;       
+        return ;
+     }
+
+    nodoArbolDecision *tempSubLista = nodo->sublistaHijos;
+
+    while(tempSubLista != NULL){
+        leerArbol(tempSubLista);
+        tempSubLista = tempSubLista->sigNodo;
     }
+    cout<<hojas<<endl;
 }
+
+
 
 bool idEnLista(nodoArbolDecision *nodo, int id){
     Indice *temp = nodo->sigInd;
@@ -1004,7 +985,6 @@ string devParametro(string parametro, Persona p){
 }
 
 void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsuario, int profFija, int profDinamica, string paramEnviar){
-    if(persTemp.id==49){cout<<"todos entraron de alguna manera"<<endl;}
     if( (profDinamica>(profFija-2)) && (profDinamica<profFija) ){
         if(nodo->sublistaHijos==NULL){
             nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar);
@@ -1014,12 +994,8 @@ void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsua
             return;
         }
         nodoArbolDecision *temp= nodo->sublistaHijos;
-        nodoArbolDecision *temp2;
 
-        while(temp!=NULL){
-            if(temp->sigNodo!=NULL){
-                temp2=temp;
-            }
+        while(temp->sigNodo!=NULL){
             if (paramEnviar==temp->valor){
                 temp->cantidad= temp->cantidad+1;
                 Indice *indTemp= temp->sigInd;
@@ -1028,14 +1004,15 @@ void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsua
                 }
                 Indice *nI= new Indice(persTemp.id);
                 indTemp->sigInd=nI;
+                return;
             }
             temp= temp->sigNodo;
         }
         nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar);
         Indice *nI= new Indice(persTemp.id);
         nN->sigInd=nI;
-        temp2->sigNodo= nN;
-
+        temp->sigNodo= nN;
+        return;
     }
     if(idEnLista(nodo, persTemp.id)==true){
         nodoArbolDecision *tempSubLista= nodo->sublistaHijos;
@@ -1050,11 +1027,11 @@ void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsua
     
 
 }
-void crearArbol(){
+void crearArbol(nodoArbolDecision *raiz){
     int cantNiveles= pedirInt("Ingrese cuantos elementos desea analizar en el arbol:");
     if(cantNiveles<3){
         cout<<"El minimo de niveles por crear es 3."<<endl;
-        crearArbol();
+        crearArbol(raiz);
     }
     
     string nivelesGeneral[15]={"Nombre", "Edad", "Provincia", "Canton", "Distrito", "Sexo", "Estado Civil", "Sueldo", "Anos Trabajando", "Cantidad Hijos", "Tipo Alimentacion", "Tipo Comida", "Hobby", "Tipo de Musica", "Cedula"};
@@ -1083,8 +1060,6 @@ void crearArbol(){
     cout<<endl;
     int cant = tamannoArchivo();
     cout<< "En el archivo hay "<< cant << " personas "<<endl;
-
-    nodoArbolDecision *raiz= new nodoArbolDecision(cant, "Raiz", "--");
 
     Indice *nInd= new Indice(0);        //se crea un primer indice
     i=1;
@@ -1156,14 +1131,62 @@ void crearArbol(){
     }*/
 
 
+}
 
+void menuUsuario(){
+    int cant = tamannoArchivo();
+    nodoArbolDecision *raiz= new nodoArbolDecision(cant, "Raiz", "--");
 
+    crearArbol(raiz);
+    cout<<raiz-> cantidad<<endl;
+    leerArbol(raiz);
 
-
+    cout<<"Ingrese el numero de la opcion deseada: \n 1- Imprimir la cantidad de hojas en el árbol.\n 2- Imprimir la cantidad de nodos en un nivel X.\n 3- Imprimir cual categoría tiene más valores diferentes, recorriendo todo el árbol. Debe validar si
+la categoría está o no el árbol. \n 4- Imprimir en el nivel X cuál es el valor de la característica con mayor cantidad de personas y cuál es la que tiene menor cantidad de personas != de cero.
+ \n 5- Imprimir   de la suma de todas las cantidades por nivel\n 6- Imprimir la cantidad de una característica con un valor en específico recorriendo el archivo, además, imprimir la cantidad de una característica con un valor en específico recorriendo el árbol creado.\n\nNumero: ";
 
 
 }
 
+void menuPrincipal(){
+/*
+Inputs: 
+        Number of choice.
+Process:
+        Displays the main menu for user to choose between the opcions.
+Outputs:
+        Respective function in the system.
+*/
+    cout<<"\n\n"<<endl;
+    cout<<"----------------------------------------------------------------"<<endl;
+    cout<<"Ingrese el numero de la opcion deseada: \n 1- Buscar persona por ID\n 2- Buscar persona por nombre\n 3- Buscar persona por posicion \n 4- Modificar persona \n 5- Salir\n\nNumero: ";
+    string opcion;
+    cin>>opcion;
+    if(opcion=="1"){
+        buscarId(pedirInt("Ingrese la cedula de la persona a buscar: "));
+        menuPrincipal();
+    }else if(opcion=="2"){
+        buscarNombre(pedirString("Ingrese el nombre la persona a buscar: "));
+        menuPrincipal();
+    }else if(opcion=="3"){
+        buscarPorPos(pedirInt("Ingrese la posicion en el archivo de la persona a buscar: "));
+        menuPrincipal();
+    }else if(opcion=="4"){
+        menuModificar();
+    }else if (opcion=="C"){
+        menuUsuario();
+    }else if(opcion=="5"){
+        cout<<"\n\nSaliendo...\n\n";
+        cout<<"Gracias por usar nuestro sistema!"<<endl;
+        system("pause");
+        return;
+    }else if(opcion=="6"){
+        return;
+    }else{
+        cout<<"Ingrese una opcion valida.";
+        menuPrincipal();
+    }
+}
 int main(){
     ofstream archivo("archivobinario.txt");
     cout<<"\n\n\t\tCargando Datos...\n\n";
@@ -1173,6 +1196,6 @@ int main(){
     //cout<<"Se termino de modificar"<<endl;
     //buscarId(521424187);
 	menuPrincipal();
-    crearArbol();
+    
 	return 0;
 }
