@@ -76,6 +76,11 @@ void setCedula(Persona *p, int nCedula){p->cedula= nCedula;}
 //-------------------| Methods |---------------------
 
 void escribir(Persona p){
+    /*
+    F Person is given and has to add this person to the file
+    I Person to add
+    O file updated with person
+    */
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 
 	if(archivo.fail()){
@@ -148,6 +153,11 @@ Outputs:
 //-------|Find person using ID or name |---------
 
 void buscarId(int id){
+    /*
+    F An id is given and returns the person with this value
+    I value to search
+    O Person that meets the requirement
+    */
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
     int contador = 0;
@@ -176,6 +186,11 @@ void buscarId(int id){
 }
 
 void buscarNombre(string pNombre){
+    /*
+    F A name is given and returns the person with this value
+    I value to search
+    O Person that meets the requirement
+    */
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
     int contador = 0;
@@ -204,6 +219,11 @@ void buscarNombre(string pNombre){
 }
 
 int buscarPos(int id){
+    /*
+    F An id is given and returns the person with this value
+    I value to search
+    O Person that meets the requirement
+    */
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
     int contador = 0;
@@ -226,7 +246,11 @@ int buscarPos(int id){
 }
 
 void buscarPorPos(int reg){
-    //Se le da una posicion, y busca la persona en esa posicion, 
+    /*
+    F A position index is given and returns the person in this positiion
+    I index
+    O Person in this position
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     Persona p;
         if(archivo.fail()){
@@ -243,6 +267,11 @@ void buscarPorPos(int reg){
 }
 
 int tamannoArchivo(){
+    /*
+    F measures the length of the list in th efile
+    I na
+    O how many persons are there in the file
+    */
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
     int contador = 0;
@@ -262,6 +291,11 @@ int tamannoArchivo(){
 }
 
 void modificarNombre(int cedula, string nNombre){
+    /*
+    F Modifies name of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -281,6 +315,11 @@ void modificarNombre(int cedula, string nNombre){
         
 
 void modificarEdad(int cedula, int nEdad){
+    /*
+    F Modifies age of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -300,6 +339,11 @@ void modificarEdad(int cedula, int nEdad){
         
 
 void modificarProvincia(int cedula, string nProvincia){
+    /*
+    F Modifies state of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -319,6 +363,11 @@ void modificarProvincia(int cedula, string nProvincia){
         
 
 void modificarCanton(int cedula, string nCanton){
+    /*
+    F Modifies great regione of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -338,6 +387,11 @@ void modificarCanton(int cedula, string nCanton){
         
 
 void modificarDistrito(int cedula, string nDistrito){
+    /*
+    F Modifies small region of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -357,6 +411,11 @@ void modificarDistrito(int cedula, string nDistrito){
         
 
 void modificarSexo(int cedula, string nSexo){
+    /*
+    F Modifies gender of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -376,6 +435,11 @@ void modificarSexo(int cedula, string nSexo){
         
 
 void modificarEstcivil(int cedula, string nEstcivil){
+    /*
+    F Modifies social status of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -395,6 +459,11 @@ void modificarEstcivil(int cedula, string nEstcivil){
         
 
 void modificarSueldo(int cedula, int nSueldo){
+    /*
+    F Modifies payroll of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -414,6 +483,11 @@ void modificarSueldo(int cedula, int nSueldo){
         
 
 void modificarAnnostrabajando(int cedula, int nAnnostrabajando){
+    /*
+    F Modifies years worked of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -433,6 +507,11 @@ void modificarAnnostrabajando(int cedula, int nAnnostrabajando){
         
 
 void modificarCanthijos(int cedula, int nCanthijos){
+    /*
+    F Modifies children quantity of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -452,6 +531,11 @@ void modificarCanthijos(int cedula, int nCanthijos){
         
 
 void modificarTipoalimentacion(int cedula, string nTipoalimentacion){
+    /*
+    F Modifies food category of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -471,6 +555,11 @@ void modificarTipoalimentacion(int cedula, string nTipoalimentacion){
         
 
 void modificarTipocomida(int cedula, string nTipocomida){
+    /*
+    F Modifies food type of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -490,6 +579,11 @@ void modificarTipocomida(int cedula, string nTipocomida){
         
 
 void modificarHobby(int cedula, string nHobby){
+    /*
+    F Modifies hobby of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -509,6 +603,11 @@ void modificarHobby(int cedula, string nHobby){
         
 
 void modificarTipomusica(int cedula, string nTipomusica){
+        /*
+    F Modifies music type of a specific person
+    I Old value, new value
+    O File updated with new info
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -528,6 +627,11 @@ void modificarTipomusica(int cedula, string nTipomusica){
         
 
 void modificarCedula(int cedula, int nCedula){
+        /*
+    F Modifes the personal id of a person
+    I new ID and old ID
+    O person's info updated
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     int reg = buscarPos(cedula);
     Persona p;
@@ -546,12 +650,12 @@ void modificarCedula(int cedula, int nCedula){
 }
         
 
-//void modificarPersona(int cedula, string nombre){
-//    int pos = buscarPos(cedula);
-//    modificarNombre(pos);
-//}
-
 void imprimirPersona(int reg){
+        /*
+    F prints a given person information
+    I index position
+    O return person based in the index
+    */
 	fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
 	Persona p;
 
@@ -565,7 +669,11 @@ void imprimirPersona(int reg){
 }
 
 void cargarDatos(){
-
+    /*
+    F loads data into the file
+    I na
+    O new file with info updated
+    */
 	cout<<"El tamano en bits de la estructura persona: "<<sizeof(Persona);
 //string nNombre, int nEdad, int nProvincia, string nCanton, string nDistrito, int nSexo, int nEstCivil, int nSueldo, 
 //int nAnnosTrabajando, int nCantHijos, int nTipoAlimentacion, int nTipoComida, string nHobby, int nTipoMusica, int nCedula
@@ -918,27 +1026,12 @@ Outputs:
 
 
 
-void leerArbol(nodoArbolDecision *nodo){
-    int hojas = 0;
-    if(nodo == NULL) return ;
-
-    if(nodo->sublistaHijos == NULL){
-        hojas++;       
-        return ;
-     }
-
-    nodoArbolDecision *tempSubLista = nodo->sublistaHijos;
-
-    while(tempSubLista != NULL){
-        leerArbol(tempSubLista);
-        tempSubLista = tempSubLista->sigNodo;
-    }
-    cout<<hojas<<endl;
-}
-
-
-
 bool idEnLista(nodoArbolDecision *nodo, int id){
+        /*
+    F Verifies if id is in linked list
+    I first node, id
+    O tru or false
+    */
     Indice *temp = nodo->sigInd;
     while(temp != NULL){
         if(temp->posicion == id){
@@ -950,7 +1043,11 @@ bool idEnLista(nodoArbolDecision *nodo, int id){
 }
 
 Persona devPers(int reg){
-    //Se le da una posicion, y busca la persona en esa posicion, 
+        /*
+    F been given a position to return the person in this position in the program
+    I index
+    O person based on index position
+    */
     fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
     Persona p;
         if(archivo.fail()){
@@ -964,6 +1061,11 @@ Persona devPers(int reg){
 }
 
 string devParametro(string parametro, Persona p){
+    /*
+    F Receives which kind of parameter is requested and returns it
+    I Parameter, person being consulted
+    O person's info about this parameter
+    */
     string porRevisar;
     if(parametro=="nombre"){            porRevisar= p.nombre;
     }else if(parametro=="edad"){        porRevisar= p.edad;
@@ -984,11 +1086,16 @@ string devParametro(string parametro, Persona p){
     return porRevisar;    
 }
 
-void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsuario, int profFija, int profDinamica, string paramEnviar){
-    if( (profDinamica>(profFija-2)) && (profDinamica<profFija) ){
-        if(nodo->sublistaHijos==NULL){
-            nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar);
-            Indice *nI= new Indice(persTemp.id);
+void agregarPersonaAUX(nodoArbolDecision *nodo, Persona persTemp, string codigoUsuario, int profFija, int profDinamica, string paramEnviar){
+    /*
+    F Auxiliary functions that creates one, else, continues
+    I root node, temporally person, codigoUsuario
+    O root node links modified to add person
+    */
+    if( (profDinamica>(profFija-2)) && (profDinamica<profFija) ){   
+        if(nodo->sublistaHijos==NULL){          //for the first node
+            nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar); //creates new node
+            Indice *nI= new Indice(persTemp.id);       //creates new linked index
             nN->sigInd = nI;
             nodo->sublistaHijos=nN;
             return;
@@ -1018,7 +1125,7 @@ void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsua
         nodoArbolDecision *tempSubLista= nodo->sublistaHijos;
         profDinamica+=1;
         while(tempSubLista!=NULL){
-            agregarPersona(tempSubLista, persTemp, codigoUsuario, profFija, profDinamica, paramEnviar);
+            agregarPersonaAUX(tempSubLista, persTemp, codigoUsuario, profFija, profDinamica, paramEnviar);
             tempSubLista= tempSubLista->sigNodo;
         }
     }else{
@@ -1027,7 +1134,27 @@ void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsua
     
 
 }
+void agregarPersona(nodoArbolDecision *nodo, Persona persTemp, string codigoUsuario, int profFija, int profDinamica, string paramEnviar){
+    /*
+    F Auxiliary functions thatvalidates if root has a link or not, if not, creates one, else, continues
+    I root node, temporally person, codigoUsuario
+    O root node links modified to add person
+    */
+    if(nodo->sublistaHijos==NULL){          //checks on if root is empty and fills it in, otherwise continues to recursive function
+            nodoArbolDecision *nN= new nodoArbolDecision(1, codigoUsuario, paramEnviar);
+            Indice *nI= new Indice(persTemp.id);
+            nN->sigInd = nI;
+            nodo->sublistaHijos=nN;
+            return;
+        }
+    agregarPersonaAUX(nodo, persTemp, codigoUsuario, profFija, profDinamica, paramEnviar);
+}
 void crearArbol(nodoArbolDecision *raiz){
+    /*
+    F Recursive functino that asks for info to create a tree
+    I How many parameters to use
+    O root node and tree created afterwise
+    */
     int cantNiveles= pedirInt("Ingrese cuantos elementos desea analizar en el arbol:");
     if(cantNiveles<3){
         cout<<"El minimo de niveles por crear es 3."<<endl;
@@ -1039,11 +1166,11 @@ void crearArbol(nodoArbolDecision *raiz){
 
     cout<<"Ingrese el numero de su nivel deseado uno a la vez."<<endl;
     cout<<"Los niveles disponibles son: \n1-Nombre\t\t2-Edad\t\t3-Provincia\t4-Canton\t\t5-Distrito\n6-Sexo\t\t\t7-Estado Civil\t8-Sueldo\t9-Anos Trabajando\t10-Cantidad Hijos\n11-Tipo Alimentacion\t12-Tipo Comida\t13-Hobby\t14-Tipo de Musica\t15-Cedula"<<endl;
-    string nivelesUsuario[15]={};
-    string codigosUsuario[15]={};
+    string nivelesUsuario[15]={};       //showable to user
+    string codigosUsuario[15]={};       //inner parameters
 
     int i=0;
-    while (i!=cantNiveles){
+    while (i!=cantNiveles){             //adds to the respective lists the parameters the user asked for
         int opcion;
         cin>>opcion;
         nivelesUsuario[i]= nivelesGeneral[opcion-1];
@@ -1052,14 +1179,15 @@ void crearArbol(nodoArbolDecision *raiz){
     }
 
     cout<<"Los niveles ingresados fueron:";
-    int j= 0;
+    int j= 0;                           //confirms the user what was added
     while(j!=cantNiveles){
         cout<<", "<<nivelesUsuario[j];
         j+=1;
     }
+
     cout<<endl;
     int cant = tamannoArchivo();
-    cout<< "En el archivo hay "<< cant << " personas "<<endl;
+    cout<< "En el archivo hay "<< cant << " personas "<<endl;       
 
     Indice *nInd= new Indice(0);        //se crea un primer indice
     i=1;
@@ -1072,79 +1200,109 @@ void crearArbol(nodoArbolDecision *raiz){
     }
 
     int q= 0;
-    while(q!= cantNiveles){
+    while(q!= cantNiveles){             //runs over all user's choice
         int i=0;
-        while(i!= cant){
-            cout<<i<<endl;
+        while(i!= cant){                    //runs over all the people
             Persona persTemp= devPers(i);
-            cout<<persTemp.nombre<<endl;
             string paramEnviar= devParametro(codigosUsuario[q], persTemp);
             agregarPersona(raiz, persTemp, codigosUsuario[q], q, 0, paramEnviar);
             i+=1;
         }
         q+=1;
     }
-    cout<<"Se termino al fin"<<endl;
-
-    /*
-    while(temp!= cantNiveles){ //revisar todos los niveles que el usuario pidio
-        int q=0;        //contador personas
-        int w=0;        //contador para insertar personas en array, no puede avanzar siempre
-        int listaParametro[60]; //Arreglo con gente que si cumple con la comparacion 
-
-        string parametro= parametrosCod[temp]; //parametro pedido por el usuario ge. nombre
-        string porRevisar;
-        
-        while(q!=cant){         //Revisar todas las personas, a ver cuales encajan
-            fstream archivo ("archivobinario.txt", ios::in|ios::out|ios::binary);
-            if(archivo.fail()){
-                cout<<"\nNo se pudo abrir el archivo";
-                exit(1);
-            }
-            Persona p;
-            archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
-            if(parametro=="nombre"){            porRevisar= p.nombre;
-            }else if(parametro=="edad"){        porRevisar= p.edad;
-            }else if(parametro=="provincia"){   porRevisar= p.provincia;
-            }else if(parametro=="canton"){      porRevisar= p.canton;
-            }else if(parametro=="distrito"){    porRevisar= p.distrito;
-            }else if(parametro=="sexo"){        porRevisar= p.sexo;
-            }else if(parametro=="estCivil"){    porRevisar= p.estCivil;
-            }else if(parametro=="sueldo"){      porRevisar= p.sueldo;
-            }else if(parametro=="annosTrabajando"){porRevisar=p.annosTrabajando;
-            }else if(parametro=="cantHijos"){   porRevisar= p.cantHijos;
-            }else if(parametro=="tipoAlimentacion"){porRevisar=p.tipoAlimentacion;
-            }else if(parametro=="tipoComida"){  porRevisar= p.tipoComida;
-            }else if(parametro=="hobby"){       porRevisar= p.hobby;
-            }else if(parametro=="tipoMusica"){  porRevisar= p.tipoMusica;
-            }else if(parametro=="cedula"){      porRevisar= p.cedula;           
-            }    
-            while(!archivo.eof()){
-                
-                archivo.read(reinterpret_cast<char*>(&p), sizeof(p));
-            }
-            archivo.close();
-
-        }
-        Nivel *nN= new Nivel(0, nivelesUsuario[0], "--");
-
-    }*/
-
 
 }
 
+int hojas=0;
+void contarHojas(nodoArbolDecision *nodo){
+    /*
+    F Counts how many leaf nodes are there in the tree
+    I Node to check temporally
+    O changes hojas value to access it later
+    */
+    if(nodo == NULL)
+        return;
+
+        if(nodo->sublistaHijos == NULL){
+            hojas++;
+            return;
+        }
+        nodoArbolDecision *tempSubLista = nodo->sublistaHijos;
+        while(tempSubLista != NULL){
+            contarHojas(tempSubLista);
+            tempSubLista = tempSubLista->sigNodo;
+        }
+}
+
+
+void menuConsultas(nodoArbolDecision *raiz){
+    /*
+    F Displays mennu for respective consults
+    I option chosen by customer
+    O reespective function
+    */
+    cout<<"Ingrese el numero de la opcion deseada:" << endl;
+    cout<< "1- Imprimir la cantidad de hojas en el árbol."<< endl;
+    cout<< "NO 2- Imprimir la cantidad de nodos en un nivel X."<< endl;
+    cout<< "NO 3- Imprimir cual categoría tiene más valores diferentes, recorriendo todo el árbol."<< endl;
+    cout<< "NO 4- Imprimir en el nivel X cuál es el valor de la característica con mayor cantidad de personas y cuál es la que tiene menor cantidad de personas != de cero. "<< endl;
+    cout<< "NO 5- Imprimir la suma de todas las cantidades por nivel"<< endl;
+    cout<< "6- Imprimir la cantidad de una característica con un valor en específico recorriendo el archivo"<< endl;
+    cout<< "Numero: "<< endl;
+
+    string opcion;
+    cin>> opcion;
+
+    if(opcion=="1"){
+        contarHojas(raiz);
+        cout<<"Hay un total de "<< hojas<<" hojas."<<endl;
+    }else if(opcion=="2"){
+        cout<<"No implementado"<<endl;
+    }else if(opcion=="3"){
+        cout<<"No implementado"<<endl;
+    }else if(opcion=="4"){
+        cout<<"No implementado"<<endl;
+    }else if(opcion=="5"){
+        cout<<"No implementado"<<endl;
+    }else if(opcion=="6"){
+        cout<<"No implementado"<<endl;
+    }else if(opcion =="7"){
+        cout<<"No implementado"<<endl;
+    }else{
+        cout<<"Ingrese una opcion valida"<<endl;
+        menuConsultas(raiz);
+    }
+}
 void menuUsuario(){
+    /*
+    f: Displays a menu to the user
+    i: option chosen
+    o: na    
+    */
     int cant = tamannoArchivo();
     nodoArbolDecision *raiz= new nodoArbolDecision(cant, "Raiz", "--");
-
     crearArbol(raiz);
-    cout<<raiz-> cantidad<<endl;
-    leerArbol(raiz);
 
-    cout<<"Ingrese el numero de la opcion deseada: \n 1- Imprimir la cantidad de hojas en el árbol.\n 2- Imprimir la cantidad de nodos en un nivel X.\n 3- Imprimir cual categoría tiene más valores diferentes, recorriendo todo el árbol. Debe validar si
-la categoría está o no el árbol. \n 4- Imprimir en el nivel X cuál es el valor de la característica con mayor cantidad de personas y cuál es la que tiene menor cantidad de personas != de cero.
- \n 5- Imprimir   de la suma de todas las cantidades por nivel\n 6- Imprimir la cantidad de una característica con un valor en específico recorriendo el archivo, además, imprimir la cantidad de una característica con un valor en específico recorriendo el árbol creado.\n\nNumero: ";
+    cout<<"Ingrese el numero de la opcion deseada:" << endl;
 
+    cout<< "1- Consultas"<< endl;
+    cout<< "2- Reportes"<< endl;
+    cout<< "Numero: "<< endl;
+
+    string opcion;
+    cin>> opcion;
+    if (opcion=="1"){
+        menuConsultas(raiz);
+    }else if(opcion=="2"){
+        cout<<"No implementado"<<endl;
+        //menuReportes();
+    }else{
+        cout<< "Ingrese una opcion valida."<<endl;
+        menuUsuario();
+        
+    }
+
+    
 
 }
 
@@ -1159,7 +1317,7 @@ Outputs:
 */
     cout<<"\n\n"<<endl;
     cout<<"----------------------------------------------------------------"<<endl;
-    cout<<"Ingrese el numero de la opcion deseada: \n 1- Buscar persona por ID\n 2- Buscar persona por nombre\n 3- Buscar persona por posicion \n 4- Modificar persona \n 5- Salir\n\nNumero: ";
+    cout<<"Ingrese el numero de la opcion deseada: \n 1- Buscar persona por ID\n 2- Buscar persona por nombre\n 3- Buscar persona por posicion \n 4- Modificar persona \n C- Continuar con el arbol\n 5- Salir\n\nNumero: ";
     string opcion;
     cin>>opcion;
     if(opcion=="1"){
@@ -1180,14 +1338,17 @@ Outputs:
         cout<<"Gracias por usar nuestro sistema!"<<endl;
         system("pause");
         return;
-    }else if(opcion=="6"){
-        return;
     }else{
         cout<<"Ingrese una opcion valida.";
         menuPrincipal();
     }
 }
 int main(){
+    /*
+    F requests a call to the menus
+    I na
+    O program workflow
+    */
     ofstream archivo("archivobinario.txt");
     cout<<"\n\n\t\tCargando Datos...\n\n";
 	cargarDatos();
